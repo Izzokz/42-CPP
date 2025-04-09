@@ -26,6 +26,7 @@ class	PhoneBook
 	public:
 		void		add(void);
 		void		search(void);
+		PhoneBook(void);
 };
 
 #endif

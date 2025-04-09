@@ -27,6 +27,7 @@ class	Contact
 	public:
 		void		set(std::string var, std::string value);
 		std::string	get(std::string var);
+		Contact(void);
 };
 
 #endif

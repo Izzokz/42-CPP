@@ -12,6 +12,15 @@
 
 #include "Contact.hpp"
 
+Contact::Contact(void)
+{
+	this->fname = std::string();
+	this->lname = std::string();
+	this->nname = std::string();
+	this->phone = std::string();
+	this->darkestSecret = std::string();
+}
+
 void	Contact::set(std::string var, std::string value)
 {
 	if (var == "fname")

@@ -32,6 +32,11 @@ static char	isDigit(std::string input)
 	return (1);
 }
 
+PhoneBook::PhoneBook(void)
+{
+	this->index = 0;
+}
+
 void	PhoneBook::add(void)
 {
 	std::string	input;
