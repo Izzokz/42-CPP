@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kzhen-cl <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/09 11:03:30 by kzhen-cl          #+#    #+#             */
+/*   Updated: 2025/04/09 11:03:31 by kzhen-cl         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "PhoneBook.hpp"
 
 static void	replaceTabs(std::string *input)
@@ -122,40 +134,40 @@ static void	printContactList(Contact contacts[8])
 	i = -1;
 	while (++i < 8)
 	{
-		std::cout << "\e[35;1m|>\e[0m " + std::string() + (char)(i + '0') + " \e[32;1m-|>\e[0m ";
+		std::cout << "\e[35;1m|>\e[0m " << (int)i << " \e[32;1m-|>\e[0m ";
 /* ********************************************************************************************************** */
 		tmp = (contacts + i)->get("fname");
 		if (tmp.size() > 10)
-			std::cout << "\e[34;1m" + std::string(tmp.c_str(), 9) + ".\e[0m \e[36;1m<|>\e[0m ";
+			std::cout << "\e[34;1m" << std::string(tmp.c_str(), 9) << ".\e[0m \e[36;1m<|>\e[0m ";
 		else if (tmp.size() < 10)
 		{
 			tmp = std::string(10 - tmp.size(), ' ') + tmp;
-			std::cout << "\e[34;1m" + tmp + "\e[0m \e[36;1m<|>\e[0m ";
+			std::cout << "\e[34;1m" << tmp << "\e[0m \e[36;1m<|>\e[0m ";
 		}
 		else
-			std::cout << "\e[34;1m" + tmp + "\e[0m \e[36;1m<|>\e[0m ";
+			std::cout << "\e[34;1m" << tmp << "\e[0m \e[36;1m<|>\e[0m ";
 /* ********************************************************************************************************** */
 		tmp = (contacts + i)->get("lname");
 		if (tmp.size() > 10)
-			std::cout << "\e[36;1m" + std::string(tmp.c_str(), 9) + ".\e[0m \e[36;1m<|>\e[0m ";
+			std::cout << "\e[36;1m" << std::string(tmp.c_str(), 9) << ".\e[0m \e[36;1m<|>\e[0m ";
 		else if (tmp.size() < 10)
 		{
 			tmp = std::string(10 - tmp.size(), ' ') + tmp;
-			std::cout << "\e[36;1m" + tmp + "\e[0m \e[36;1m<|>\e[0m ";
+			std::cout << "\e[36;1m" << tmp << "\e[0m \e[36;1m<|>\e[0m ";
 		}
 		else
-			std::cout << "\e[36;1m" + tmp + "\e[32;1m \e[36;1m<|>\e[0m ";
+			std::cout << "\e[36;1m" << tmp << "\e[32;1m \e[36;1m<|>\e[0m ";
 /* ********************************************************************************************************** */
 		tmp = (contacts + i)->get("nname");
 		if (tmp.size() > 10)
-			std::cout << "\e[34;1m" + std::string(tmp.c_str(), 9) + ".\e[0m \e[35;1m<|\e[0m\n";
+			std::cout << "\e[34;1m" << std::string(tmp.c_str(), 9) << ".\e[0m \e[35;1m<|\e[0m\n";
 		else if (tmp.size() < 10)
 		{
 			tmp = std::string(10 - tmp.size(), ' ') + tmp;
-			std::cout << "\e[34;1m" + tmp + "\e[0m \e[35;1m<|\e[0m\n";
+			std::cout << "\e[34;1m" << tmp << "\e[0m \e[35;1m<|\e[0m\n";
 		}
 		else
-			std::cout << "\e[34;1m" + tmp + "\e[0m \e[35;1m<|\e[0m\n";
+			std::cout << "\e[34;1m" << tmp << "\e[0m \e[35;1m<|\e[0m\n";
 /* ********************************************************************************************************** */
 	}
 	std::cout << "\e[35;1m|I\e[0m----\e[35;1m/\e[0m++\e[33;1mII\e[0m++\e[35;1m\\\e[0m-++-\e[35;1m/\e[33;1mAA\e[0m--\e[32;1m||\e[35;1mMM\e[32;1m||\e[0m--\e[33;1mAA\e[35;1m\\\e[0m-++-\e[35;1m/\e[0m++\e[33;1mII\e[0m++\e[35;1m\\\e[0m----\e[35;1mI|\e[0m\n";
@@ -165,11 +177,11 @@ static void	printContactList(Contact contacts[8])
 
 static void	printContact(Contact contact)
 {
-	std::cout << "\e[32;1mFirst Name:\e[0m " + contact.get("fname")
-		+ "\n\e[32;1mLast Name:\e[0m " + contact.get("lname")
-		+ "\n\e[32;1mNickname:\e[0m " + contact.get("nname")
-		+ "\n\e[32;1mPhone Number:\e[0m " + contact.get("phone")
-		+ "\n\e[32;1mDarkest Secret:\e[0m " + contact.get("darkestSecret") + '\n';
+	std::cout << "\e[32;1mFirst Name:\e[0m " << contact.get("fname")
+		<< "\n\e[32;1mLast Name:\e[0m " << contact.get("lname")
+		<< "\n\e[32;1mNickname:\e[0m " << contact.get("nname")
+		<< "\n\e[32;1mPhone Number:\e[0m " << contact.get("phone")
+		<< "\n\e[32;1mDarkest Secret:\e[0m " << contact.get("darkestSecret") << '\n';
 }
 
 void	PhoneBook::search(void)
