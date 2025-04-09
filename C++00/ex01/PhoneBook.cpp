@@ -138,7 +138,7 @@ static void	printContactList(Contact contacts[8])
 /* ********************************************************************************************************** */
 		tmp = (contacts + i)->get("fname");
 		if (tmp.size() > 10)
-			std::cout << "\e[34;1m" << std::string(tmp.c_str(), 9) << ".\e[0m \e[36;1m<|>\e[0m ";
+			std::cout << "\e[34;1m" << tmp.substr(0, 9) << ".\e[0m \e[36;1m<|>\e[0m ";
 		else if (tmp.size() < 10)
 		{
 			tmp = std::string(10 - tmp.size(), ' ') + tmp;
@@ -149,7 +149,7 @@ static void	printContactList(Contact contacts[8])
 /* ********************************************************************************************************** */
 		tmp = (contacts + i)->get("lname");
 		if (tmp.size() > 10)
-			std::cout << "\e[36;1m" << std::string(tmp.c_str(), 9) << ".\e[0m \e[36;1m<|>\e[0m ";
+			std::cout << "\e[36;1m" << tmp.substr(0, 9) << ".\e[0m \e[36;1m<|>\e[0m ";
 		else if (tmp.size() < 10)
 		{
 			tmp = std::string(10 - tmp.size(), ' ') + tmp;
@@ -160,7 +160,7 @@ static void	printContactList(Contact contacts[8])
 /* ********************************************************************************************************** */
 		tmp = (contacts + i)->get("nname");
 		if (tmp.size() > 10)
-			std::cout << "\e[34;1m" << std::string(tmp.c_str(), 9) << ".\e[0m \e[35;1m<|\e[0m\n";
+			std::cout << "\e[34;1m" << tmp.substr(0, 9) << ".\e[0m \e[35;1m<|\e[0m\n";
 		else if (tmp.size() < 10)
 		{
 			tmp = std::string(10 - tmp.size(), ' ') + tmp;
