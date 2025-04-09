@@ -24,7 +24,7 @@ int	main(void)
 		std::cout << "phone> ";
 		if (!std::getline(std::cin, input))
 		{
-			std::cout << "\e[35;1mEOF signal found. Exiting program.\e[0m\n";
+			std::cout << "\e[35;1mEOF found. Exiting program.\e[0m\n";
 			return (0);
 		}
 		if (input == "EXIT")

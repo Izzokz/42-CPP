@@ -12,7 +12,7 @@
 
 #include "PhoneBook.hpp"
 
-static void	replaceTabs(std::string *input)
+static void	replaceTabsNonPrintable(std::string *input)
 {
 	size_t	i;
 
@@ -22,6 +22,9 @@ static void	replaceTabs(std::string *input)
 		input->replace(i, 1, "    ");
 		i += 4;
 	}
+	for (std::string::iterator iter = input->begin(); iter != input->end(); iter++)
+		if (*iter < ' ' || *iter == 127)
+			*iter = ' ';
 }
 
 static char	isDigit(std::string input)
@@ -47,14 +50,14 @@ void	PhoneBook::add(void)
 		if (!std::getline(std::cin, input))
 		{
 			gEOF = 1;
-			std::cout << "\e[35;1mEOF Signal found. Exiting program.\e[0m\n";
+			std::cout << "\e[35;1mEOF found. Exiting program.\e[0m\n";
 			return ;
 		}
 		if (input.size() > 0)
 			break ;
 		std::cout << "\e[31;1mInvalid entry.\e[0m\n";
 	}
-	replaceTabs(&input);
+	replaceTabsNonPrintable(&input);
 	(this->contacts + this->index)->set("fname", input);
 /* ********************************************************************************************************** */
 	while (1)
@@ -63,14 +66,14 @@ void	PhoneBook::add(void)
 		if (!std::getline(std::cin, input))
 		{
 			gEOF = 1;
-			std::cout << "\e[35;1mEOF Signal found. Exiting program.\e[0m\n";
+			std::cout << "\e[35;1mEOF found. Exiting program.\e[0m\n";
 			return ;
 		}
 		if (input.size() > 0)
 			break ;
 		std::cout << "\e[31;1mInvalid entry.\e[0m\n";
 	}
-	replaceTabs(&input);
+	replaceTabsNonPrintable(&input);
 	(this->contacts + this->index)->set("lname", input);
 /* ********************************************************************************************************** */
 	while (1)
@@ -79,14 +82,14 @@ void	PhoneBook::add(void)
 		if (!std::getline(std::cin, input))
 		{
 			gEOF = 1;
-			std::cout << "\e[35;1mEOF Signal found. Exiting program.\e[0m\n";
+			std::cout << "\e[35;1mEOF found. Exiting program.\e[0m\n";
 			return ;
 		}
 		if (input.size() > 0)
 			break ;
 		std::cout << "\e[31;1mInvalid entry.\e[0m\n";
 	}
-	replaceTabs(&input);
+	replaceTabsNonPrintable(&input);
 	(this->contacts + this->index)->set("nname", input);
 /* ********************************************************************************************************** */
 	while (1)
@@ -95,14 +98,14 @@ void	PhoneBook::add(void)
 		if (!std::getline(std::cin, input))
 		{
 			gEOF = 1;
-			std::cout << "\e[35;1mEOF Signal found. Exiting program.\e[0m\n";
+			std::cout << "\e[35;1mEOF found. Exiting program.\e[0m\n";
 			return ;
 		}
 		if (input.size() > 0  && isDigit(input))
 			break ;
 		std::cout << "\e[31;1mInvalid entry.\e[0m\n";
 	}
-	replaceTabs(&input);
+	replaceTabsNonPrintable(&input);
 	(this->contacts + this->index)->set("phone", input);
 /* ********************************************************************************************************** */
 	while (1)
@@ -111,14 +114,14 @@ void	PhoneBook::add(void)
 		if (!std::getline(std::cin, input))
 		{
 			gEOF = 1;
-			std::cout << "\e[35;1mEOF Signal found. Exiting program.\e[0m\n";
+			std::cout << "\e[35;1mEOF found. Exiting program.\e[0m\n";
 			return ;
 		}
 		if (input.size() > 0)
 			break ;
 		std::cout << "\e[31;1mInvalid entry.\e[0m\n";
 	}
-	replaceTabs(&input);
+	replaceTabsNonPrintable(&input);
 	(this->contacts + this->index)->set("darkestSecret", input);
 /* ********************************************************************************************************** */
 	std::cout << "\e[32;1mEverything is saved !\e[0m\n";
@@ -200,7 +203,7 @@ void	PhoneBook::search(void)
 		if (!std::getline(std::cin, tmp))
 		{
 			gEOF = 1;
-			std::cout << "\e[35;1mEOF Signal found. Exiting program.\e[0m\n";
+			std::cout << "\e[35;1mEOF found. Exiting program.\e[0m\n";
 			return ;
 		}
 		if (tmp.size() != 1 || (*tmp.c_str() < '0' || *tmp.c_str() > '7'))
