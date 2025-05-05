@@ -14,7 +14,7 @@
 
 Zombie::Zombie(void)
 {
-	std::cout << "\e[32;1mZombie \"" << this->name << "\" Created !\e[0m\n";
+	std::cout << "\e[32;1mZombie Created !\e[0m\n";
 }
 
 Zombie::~Zombie(void)
