@@ -179,7 +179,7 @@ static void	printContactList(Contact contacts[8])
 /* ********************************************************************************************************** */
 	}
 	std::cout << "\e[35;1m|I\e[0m----\e[35;1m/\e[0m++\e[33;1mII\e[0m++\e[35;1m\\\e[0m-++-\e[35;1m/\e[33;1mAA\e[0m--\e[32;1m||\e[35;1mMM\e[32;1m||\e[0m--\e[33;1mAA\e[35;1m\\\e[0m-++-\e[35;1m/\e[0m++\e[33;1mII\e[0m++\e[35;1m\\\e[0m----\e[35;1mI|\e[0m\n";
-	std::cout << "\e[35;1m|II\e[0m--\e[35;1m<\e[0m-++\e[33;1mII\e[0m++-\e[35;1m>\e[0m++\e[35;1m<\e[0m-\e[33;1mXX\e[0m--\e[32;1mAAXXAA\e[0m--\e[32;1mXX\e[0m-\e[35;1m>\e[0m++\e[35;1m<\e[0m-++\e[33;1mII\e[0m++-\e[35;1m>\e[0m--\e[35;1mII|\e[0m\n";
+	std::cout << "\e[35;1m|II\e[0m--\e[35;1m<\e[0m-++\e[33;1mII\e[0m++-\e[35;1m>\e[0m++\e[35;1m<\e[0m-\e[33;1mXX\e[0m--\e[32;1mAAXXAA\e[0m--\e[33;1mXX\e[0m-\e[35;1m>\e[0m++\e[35;1m<\e[0m-++\e[33;1mII\e[0m++-\e[35;1m>\e[0m--\e[35;1mII|\e[0m\n";
 	std::cout << "\e[35;1m|III\e[0m--\e[35;1m\\\e[0m++\e[33;1mII\e[0m++\e[35;1m/\e[0m-++-\e[35;1m\\\e[33;1mVV\e[0m--\e[32;1mVV\e[35;1m\\/\e[32;1mVV\e[0m--\e[33;1mVV\e[35;1m/\e[0m-++-\e[35;1m\\\e[0m++\e[33;1mII\e[0m++\e[35;1m/\e[0m--\e[35;1mIII|\e[0m\n";
 }
 
