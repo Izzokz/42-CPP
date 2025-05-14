@@ -18,7 +18,7 @@ ClapTrap::ClapTrap(std::string name) : _hp(10), _ep(10), _dmg(0)
 	std::cout << "\e[32;1mClapTrap default constructor called\e[0m\n";
 }
 
-ClapTrap::ClapTrap(ClapTrap &cpy) : _name(cpy._name), _hp(cpy._hp), _ep(cpy._ep), _dmg(cpy._dmg)
+ClapTrap::ClapTrap(const ClapTrap &cpy) : _name(cpy._name), _hp(cpy._hp), _ep(cpy._ep), _dmg(cpy._dmg)
 {
 	std::cout << "\e[32;1mClapTrap copy constructor called\e[0m\n";
 }
@@ -28,7 +28,7 @@ ClapTrap::~ClapTrap(void)
 	std::cout << "\e[31;1mClapTrap destructor called\e[0m\n";
 }
 
-ClapTrap	&ClapTrap::operator=(ClapTrap &cpy)
+ClapTrap	&ClapTrap::operator=(const ClapTrap &cpy)
 {
 	this->_name = cpy._name;
 	this->_hp = cpy._hp;
