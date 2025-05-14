@@ -33,10 +33,10 @@ class	Fixed
 		bool		operator<(const Fixed &f) const;
 		bool		operator>=(const Fixed &f) const;
 		bool		operator<=(const Fixed &f) const;
-		float		operator+(const Fixed &f) const;
-		float		operator-(const Fixed &f) const;
-		float		operator/(const Fixed &f) const;
-		float		operator*(const Fixed &f) const;
+		Fixed		operator+(const Fixed &f) const;
+		Fixed		operator-(const Fixed &f) const;
+		Fixed		operator/(const Fixed &f) const;
+		Fixed		operator*(const Fixed &f) const;
 		Fixed		&operator++(void);
 		Fixed		operator++(int);
 		Fixed		&operator--(void);
