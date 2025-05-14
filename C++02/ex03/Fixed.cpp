@@ -91,22 +91,22 @@ bool	Fixed::operator<=(const Fixed &f) const
 
 Fixed	Fixed::operator+(const Fixed &f) const
 {
-	return (Fixed(this->toFloat() + f.toFloat()));
+	return (this->toFloat() + f.toFloat());
 }
 
 Fixed	Fixed::operator-(const Fixed &f) const
 {
-	return (Fixed(this->toFloat() - f.toFloat()));
+	return (this->toFloat() - f.toFloat());
 }
 
 Fixed	Fixed::operator/(const Fixed &f) const
 {
-	return (Fixed(this->toFloat() / f.toFloat()));
+	return (this->toFloat() / f.toFloat());
 }
 
 Fixed	Fixed::operator*(const Fixed &f) const
 {
-	return (Fixed(this->toFloat() * f.toFloat()));
+	return (this->toFloat() * f.toFloat());
 }
 
 Fixed	&Fixed::operator++(void)
