@@ -14,7 +14,6 @@
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
-	this->_name = name;
 	this->_hp = 100;
 	this->_ep = 50;
 	this->_dmg = 20;
@@ -23,7 +22,6 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 
 ScavTrap::ScavTrap(const ScavTrap &cpy) : ClapTrap(cpy)
 {
-	this->_name = cpy._name;
 	this->_hp = cpy._hp;
 	this->_ep = cpy._ep;
 	this->_dmg = cpy._dmg;
