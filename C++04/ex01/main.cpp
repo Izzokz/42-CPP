@@ -30,6 +30,7 @@ void	mindReader(Brain *occurence)
 int	main(void)
 {
 	{
+		Animal		nothing;
 		const Animal	*dog = new Dog();
 		const Animal	*cat = new Cat();
 		dog->getBrain()->addIdea("Bro");
