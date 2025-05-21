@@ -71,5 +71,14 @@ int	main(void)
 		for (char i = 0; i < 100; i++)
 			delete (*(cadog + i));
 	}
+	{
+		const AAnimal	*a1 = new Dog();
+		AAnimal	*a2 = new Dog(*(Dog *)a1);
+
+		*a2 = *a1;
+		mindReader(a2->getBrain());
+		delete (a1);
+		delete (a2);
+	}
 	return (0);
 }
