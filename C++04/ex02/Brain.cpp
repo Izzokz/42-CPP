@@ -14,30 +14,21 @@
 
 Brain::Brain(void)
 {
-	char	i;
-
-	i = -1;
-	while (++i < 100)
+	for (char i = 0; i < 100; i++)
 		*(ideas + i) = "";
 	std::cout << "Brain default constructor called\n";
 }
 
 Brain::Brain(const Brain &cpy)
 {
-	char	i;
-
-	i = -1;
-	while (++i < 100)
+	for (char i = 0; i < 100; i++)
 		*(ideas + i) = *(cpy.ideas + i);
 	std::cout << "Brain copy constructor called\n";
 }
 
 Brain	&Brain::operator=(const Brain &cpy)
 {
-	char	i;
-
-	i = -1;
-	while (++i < 100)
+	for (char i = 0; i < 100; i++)
 		*(ideas + i) = *(cpy.ideas + i);
 	std::cout << "Brain copy assignment operator called\n";
 	return (*this);
@@ -50,15 +41,15 @@ Brain::~Brain(void)
 
 void		Brain::addIdea(const std::string &idea)
 {
-	char	i;
-
-	i = -1;
-	while (++i < 100 && *(ideas + i) != "")
-		;
-	if (i == 100)
-		std::cout << "[ERROR] This Brain knows too much about its world... Try replacing a slot.\n";
-	else
-		*(ideas + i) = idea;
+	for (char i = 0; i < 100; i++)
+	{
+		if (*(ideas + i) == "")
+		{
+			*(ideas + i) = idea;
+			return ;
+		}
+	}
+	std::cout << "[ERROR] This Brain knows too much about its world... Try replacing a slot.\n";
 }
 
 void		Brain::addIdea(const std::string &idea, char slot)

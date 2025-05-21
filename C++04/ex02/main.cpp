@@ -15,11 +15,9 @@
 
 void	mindReader(Brain *occurence)
 {
-	char		i;
 	std::string	thought;
 
-	i = -1;
-	while (++i < 100)
+	for (char i = 0; i < 100; i++)
 	{
 		thought = occurence->readThought(i);
 		if (thought != "")
@@ -65,16 +63,12 @@ int	main(void)
 	}
 	{
 		const AAnimal	*cadog[100];
-		char		i;
 
-		i = -1;
-		while (++i < 50)
+		for (char i = 0; i < 50; i++)
 			*(cadog + i) = new Cat();
-		i--;
-		while (++i < 100)
+		for (char i = 50; i < 100; i++)
 			*(cadog + i) = new Dog();
-		i = -1;
-		while (++i < 100)
+		for (char i = 0; i < 100; i++)
 			delete (*(cadog + i));
 	}
 	return (0);
