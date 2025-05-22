@@ -21,22 +21,25 @@ void	search_and_replace(std::ifstream &input, std::ofstream &output,
 	int		strlen;
 	int		i;
 
-	input.seekg(0, input.beg);
-	input.read(buffer, len);
-	*(buffer + len) = '\0';
-	strlen = ((std::string)*sar).length();
-	i = 0;
-	while (*(buffer + i))
+	if (*(*sar))
 	{
-		if (!((std::string)(buffer + i)).compare(0, strlen, (std::string)*sar))
+		input.seekg(0, input.beg);
+		input.read(buffer, len);
+		*(buffer + len) = '\0';
+		strlen = ((std::string)*sar).length();
+		i = 0;
+		while (*(buffer + i))
 		{
-			output << *(sar + 1);
-			i += strlen;
-		}
-		else
-		{
-			output << *(buffer + i);
-			i++;
+			if (!((std::string)(buffer + i)).compare(0, strlen, (std::string)*sar))
+			{
+				output << *(sar + 1);
+				i += strlen;
+			}
+			else
+			{
+				output << *(buffer + i);
+				i++;
+			}
 		}
 	}
 	input.close();
