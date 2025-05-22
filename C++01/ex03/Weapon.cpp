@@ -28,7 +28,7 @@ Weapon::~Weapon(void)
 	std::cout << "\e[31;1mWeapon \"" << this->type << "\" Deleted !\e[0m\n";
 }
 
-std::string	Weapon::getType(void)
+const std::string	&Weapon::getType(void) const
 {
 	return (this->type);
 }
