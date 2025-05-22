@@ -17,12 +17,11 @@ int	main(int argc, char *argv[])
 	Harl	a = Harl();
 
 	(void) argc;
-	a.complain("INFO");
 	a.complain("DEBUG");
+	a.complain("INFO");
 	a.complain("WARNING");
 	a.complain("ERROR");
 	a.complain("NANANANA");
-	std::cout << '\n';
 	while (*++argv)
 		a.complain((std::string)*argv);
 }
