@@ -15,36 +15,35 @@
 #include <string>
 
 void	search_and_replace(std::ifstream &input, std::ofstream &output,
-	int len, char *sar[2])
+	const int len, char *sar[2])
 {
-	char	*buffer = new char[len + 1];
-	int		strlen;
-	int		i;
+	char		*tmpbuff = new char[len + 1];
+	std::string	from = (std::string)*sar;
+	std::string	to = (std::string)*(sar + 1);
+	std::string	buffer;
+	std::string	finalForm = "";
 
+	input.seekg(0, input.beg);
+	input.read(tmpbuff, len);
+	*(tmpbuff + len) = 0;
+	buffer = tmpbuff;
+	delete[] (tmpbuff);
+	input.close();
 	if (*(*sar))
 	{
-		input.seekg(0, input.beg);
-		input.read(buffer, len);
-		*(buffer + len) = '\0';
-		strlen = ((std::string)*sar).length();
-		i = 0;
-		while (*(buffer + i))
+		std::string::size_type	prev = 0;
+		std::string::size_type	n;
+		for (n = buffer.find(from, prev); n != std::string::npos; n = buffer.find(from, prev))
 		{
-			if (!((std::string)(buffer + i)).compare(0, strlen, (std::string)*sar))
-			{
-				output << *(sar + 1);
-				i += strlen;
-			}
-			else
-			{
-				output << *(buffer + i);
-				i++;
-			}
+			finalForm += buffer.substr(prev, n - prev) + to;
+			prev = n + from.length();
 		}
+		finalForm += buffer.substr(prev);
 	}
-	input.close();
+	else
+		finalForm += buffer;
+	output << finalForm;
 	output.close();
-	delete []buffer;
 	return ;
 }
 
