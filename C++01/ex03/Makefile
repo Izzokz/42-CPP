@@ -1,4 +1,4 @@
-NAME = hithisbrain
+NAME = HumanStory
 
 SRC = main.cpp HumanA.cpp Weapon.cpp HumanB.cpp
 OBJ = $(SRC:.cpp=.o)
