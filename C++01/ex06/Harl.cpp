@@ -12,12 +12,12 @@
 
 #include "Harl.hpp"
 
-void	Harl::info(void)
+void	Harl::debug(void)
 {
 	std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger. I really do!\n";
 }
 
-void	Harl::debug(void)
+void	Harl::info(void)
 {
 	std::cout << "I cannot believe adding extra bacon costs more money. You didn’t put enough bacon in my burger! If you did, I wouldn’t be asking for more!\n";
 }
@@ -34,20 +34,20 @@ void	Harl::error(void)
 
 void	Harl::complain(std::string level)
 {
-	const char	*levels[5] = {"INFO", "DEBUG", "WARNING", "ERROR", ""};
+	const char	*levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	char		*actualLevel = (char *)"";
 	char		i;
 
 	i = -1;
-	while (++i < 5)
+	while (++i < 4)
 		if (level == (std::string)*(levels + i))
 			actualLevel = (char *)*(levels + i);
-	switch (actualLevel[0])
+	switch (*actualLevel)
 	{
-		case 'I':
-			this->info();
 		case 'D':
 			this->debug();
+		case 'I':
+			this->info();
 		case 'W':
 			this->warning();
 		case 'E':
