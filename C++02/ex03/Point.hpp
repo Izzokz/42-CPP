@@ -26,8 +26,8 @@ class	Point
 		Point(const Point &cpy);
 		Point	&operator=(const Point &cpy);
 		~Point(void);
-		float	getX(void) const;
-		float	getY(void) const;
+		Fixed	getX(void) const;
+		Fixed	getY(void) const;
 };
 
 bool	bsp(const Point a, const Point b, const Point c, const Point point);

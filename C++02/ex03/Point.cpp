@@ -39,12 +39,12 @@ Point	&Point::operator=(const Point &cpy)
 	return (*this);
 }
 
-float	Point::getX(void) const
+Fixed	Point::getX(void) const
 {
-	return (this->_x.toFloat());
+	return (this->_x);
 }
 
-float	Point::getY(void) const
+Fixed	Point::getY(void) const
 {
-	return (this->_y.toFloat());
+	return (this->_y);
 }

@@ -19,7 +19,7 @@ class	Fixed
 {
 	private:
 		int			_raw;
-		static const int	_bits = 8;
+		static const int	_bits = 24;
 	public:
 		Fixed(void);
 		Fixed(const int raw);
