@@ -14,24 +14,24 @@
 
 AMateria::AMateria(const std::string &type) : _type(type)
 {
-	std::cout << "AMateria default constructor called\n";
+	std::cout << "AMateria default constructor called" << std::endl;
 }
 
 AMateria::AMateria(const AMateria &cpy) : _type(cpy._type)
 {
-	std::cout << "AMateria copy constructor called\n";
+	std::cout << "AMateria copy constructor called" << std::endl;
 }
 
 AMateria	&AMateria::operator=(const AMateria &cpy)
 {
 	_type = cpy._type;
-	std::cout << "AMateria copy assignment operator called\n";
+	std::cout << "AMateria copy assignment operator called" << std::endl;
 	return (*this);
 }
 
 AMateria::~AMateria(void)
 {
-	std::cout << "AMateria destructor called\n";
+	std::cout << "AMateria destructor called" << std::endl;
 }
 
 const std::string	&AMateria::getType(void) const
@@ -41,5 +41,5 @@ const std::string	&AMateria::getType(void) const
 
 void	AMateria::use(ICharacter &target)
 {
-	std::cout << "* " << target.getName() << " senses a subtle mana touch that feels pretty chill *\n";
+	std::cout << "* " << target.getName() << " senses a subtle mana touch that feels pretty chill *" << std::endl;
 }

@@ -14,23 +14,23 @@
 
 IMateriaSource::IMateriaSource(void)
 {
-	std::cout << "IMateriaSource default constructor called\n";
+	std::cout << "IMateriaSource default constructor called" << std::endl;
 }
 
 IMateriaSource::IMateriaSource(const IMateriaSource &cpy)
 {
 	(void) cpy;
-	std::cout << "IMateriaSource copy constructor called\n";
+	std::cout << "IMateriaSource copy constructor called" << std::endl;
 }
 
 IMateriaSource	&IMateriaSource::operator=(const IMateriaSource &cpy)
 {
 	(void) cpy;
-	std::cout << "IMateriaSource copy assignment operator called\n";
+	std::cout << "IMateriaSource copy assignment operator called" << std::endl;
 	return (*this);
 }
 
 IMateriaSource::~IMateriaSource(void)
 {
-	std::cout << "IMateriaSource destructor called\n";
+	std::cout << "IMateriaSource destructor called" << std::endl;
 }

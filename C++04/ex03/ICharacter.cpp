@@ -14,23 +14,23 @@
 
 ICharacter::ICharacter(void)
 {
-	std::cout << "ICharacter default constructor called\n";
+	std::cout << "ICharacter default constructor called" << std::endl;
 }
 
 ICharacter::ICharacter(const ICharacter &cpy)
 {
 	(void) cpy;
-	std::cout << "ICharacter copy constructor called\n";
+	std::cout << "ICharacter copy constructor called" << std::endl;
 }
 
 ICharacter	&ICharacter::operator=(const ICharacter &cpy)
 {
 	(void) cpy;
-	std::cout << "ICharacter copy assignment operator called\n";
+	std::cout << "ICharacter copy assignment operator called" << std::endl;
 	return (*this);
 }
 
 ICharacter::~ICharacter(void)
 {
-	std::cout << "ICharacter destructor called\n";
+	std::cout << "ICharacter destructor called" << std::endl;
 }

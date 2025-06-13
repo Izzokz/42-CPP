@@ -16,7 +16,7 @@ MateriaSource::MateriaSource(void)
 {
 	for (char i = 0; i < 4; i++)
 		*(_slot + i) = NULL;
-	std::cout << "MateriaSource default constructor called\n";
+	std::cout << "MateriaSource default constructor called" << std::endl;
 }
 
 MateriaSource::MateriaSource(const MateriaSource &cpy)
@@ -30,7 +30,7 @@ MateriaSource::MateriaSource(const MateriaSource &cpy)
 		else
 			*(_slot + i) = NULL;
 	}
-	std::cout << "MateriaSource copy constructor called\n";
+	std::cout << "MateriaSource copy constructor called" << std::endl;
 }
 
 MateriaSource	&MateriaSource::operator=(const MateriaSource &cpy)
@@ -44,7 +44,7 @@ MateriaSource	&MateriaSource::operator=(const MateriaSource &cpy)
 		else
 			*(_slot + i) = NULL;
 	}
-	std::cout << "MateriaSource copy assignment operator called\n";
+	std::cout << "MateriaSource copy assignment operator called" << std::endl;
 	return (*this);
 }
 
@@ -53,7 +53,7 @@ MateriaSource::~MateriaSource(void)
 	for (char i = 0; i < 4; i++)
 		if (*(_slot + i))
 			delete (*(_slot + i));
-	std::cout << "MateriaSource destructor called\n";
+	std::cout << "MateriaSource destructor called" << std::endl;
 }
 
 void	MateriaSource::learnMateria(AMateria *m)
@@ -63,11 +63,11 @@ void	MateriaSource::learnMateria(AMateria *m)
 		if (!*(_slot + i))
 		{
 			*(_slot + i) = m;
-			std::cout << "* A MateriaSource learned " << m->getType() << " *\n";
+			std::cout << "* A MateriaSource learned " << m->getType() << " *" << std::endl;
 			return ;
 		}
 	}
-	std::cout << "* Greedy guys tried to overclock a MateriaSource *\n";
+	std::cout << "* Greedy guys tried to overclock a MateriaSource *" << std::endl;
 }
 
 AMateria	*MateriaSource::createMateria(const std::string &type)
