@@ -22,16 +22,9 @@ Character::Character(const std::string &name) : ICharacter()
 
 Character::Character(const Character &cpy) : ICharacter(cpy)
 {
-	_name = cpy._name;
 	for (char i = 0; i < 4; i++)
-	{
-		if (*(_slot + i))
-			delete (*(_slot + i));
-		if (*(cpy._slot + i))
-			*(_slot + i) = (*(cpy._slot + i))->clone();
-		else
-			*(_slot + i) = NULL;
-	}
+		*(_slot + i) = NULL;
+	*this = cpy;
 	std::cout << "Character copy constructor called\n";
 }
 
@@ -66,6 +59,11 @@ const std::string	&Character::getName(void) const
 
 void	Character::equip(AMateria *m)
 {
+	if (!m)
+	{
+		std::cout << "* " << getName() << " found a really odd Materia that can't even be used. *\n";
+		return ;
+	}
 	for (char i = 0; i < 4; i++)
 	{
 		if (!*(_slot + i))
@@ -105,4 +103,11 @@ void	Character::use(int idx, ICharacter &target)
 		(*(_slot + idx))->use(target);
 	else
 		std::cout << "* " << getName() << " tried to call (void *)0 *\n";
+}
+
+AMateria	*Character::collectMateria(int idx) const
+{
+	if (idx < 0 || idx > 3)
+		return (NULL);
+	return (*(_slot + idx));
 }

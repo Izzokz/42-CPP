@@ -3,90 +3,61 @@
 #include "Character.hpp"
 #include "MateriaSource.hpp"
 
-int	subjectMain(void)
+int	main(void)
 {
-	IMateriaSource*	src = new MateriaSource();
+	IMateriaSource	*src = new MateriaSource();
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());
-	ICharacter*	me = new Character("me");
-	AMateria*	tmp;
+	src->learnMateria(new Cure());
+	src->learnMateria(new Ice());
+	AMateria	*i = new Ice();
+	src->learnMateria(i);
+	delete (i);
+	ICharacter	*me = new Character("me");
+	AMateria	*tmp;
 	tmp = src->createMateria("ice");
+	me->equip(tmp);
+	std::cout << "* CREATING NEW CHARACTER *\n";
+	ICharacter	*notme = new Character(*(Character *)me);
+	std::cout << "* CREATION PROCESS TERMINATED *\n";
+	std::cout << "* CREATING NEW CHARACTER+ *\n";
+	Character	notme2("kou");
+	tmp = src->createMateria("cure");
+	notme2.equip(tmp);
+	std::cout << notme2.getName() << " is my name.\n";
+	std::cout << "* NEW CHARACTER+ INITIALIZED *\n";
+	notme2 = *(Character *)notme;
+	std::cout << "* REPLACEMENT PROCESS TERMINATED *\n";
+	std::cout << notme2.getName() << " is my name.\n";
+	tmp = src->createMateria("cure");
+	me->equip(tmp);
+	ICharacter	*bob = new Character("bob");
+	me->use(0, *bob);
+	me->use(1, *bob);
+	me->use(2, *bob);
+	me->use(5, *bob);
+	me->unequip(5);
+	me->unequip(3);
+	tmp = (*(Character *)me).collectMateria(0);
+	me->unequip(0);
+	delete (tmp);
+	me->unequip(0);
+	tmp = src->createMateria("cure");
+	me->equip(tmp);
+	tmp = src->createMateria("cure");
+	me->equip(NULL);
 	me->equip(tmp);
 	tmp = src->createMateria("cure");
 	me->equip(tmp);
-	ICharacter*	bob = new Character("bob");
-	me->use(0, *bob);
-	me->use(1, *bob);
+	tmp = src->createMateria("ice");
+	me->equip(tmp);
+	notme2.equip(tmp);
+	notme->use(1, *bob);
+	notme->use(2, *bob);
+	notme2.use(1, *notme);
 	delete (bob);
 	delete (me);
+	delete (notme);
 	delete (src);
-	return (0);
-}
-
-int	main(void) // MAIN FROM https://github.com/aceyzz/CPP04/blob/main/ex03/src/main.cpp
-{
-	std::cout << "MAIN\n\n";
-	subjectMain();
-	std::cout << "NOTMAIN\n\n";
-	ICharacter	*john = new Character("John");
-	ICharacter	*bill = new Character("Bill");
-	std::cout << std::endl;
-
-	IMateriaSource	*source = new MateriaSource();
-	std::cout << std::endl;
-
-	Ice		*ice = new Ice();
-	Cure	*cure = new Cure();
-	std::cout << std::endl;
-
-	source->learnMateria(ice);
-	source->learnMateria(cure);
-	std::cout << std::endl;
-
-	john->equip(source->createMateria("cure"));
-	john->equip(source->createMateria("ice"));
-	std::cout << std::endl;
-
-	bill->equip(source->createMateria("cure"));
-	bill->equip(source->createMateria("ice"));
-	std::cout << std::endl;
-
-	john->use(1, *bill);
-	std::cout << std::endl;
-
-	john->use(0, *john);
-	std::cout << std::endl;
-
-	bill->use(1, *john);
-	std::cout << std::endl;
-
-	bill->use(0, *bill);
-	std::cout << std::endl;
-
-	john->use(3, *bill);
-	std::cout << std::endl;
-
-	AMateria *tmp0 = ice;
-	john->unequip(1);
-	std::cout << std::endl;
-
-	john->unequip(1);
-	std::cout << std::endl;
-
-	AMateria *tmp1 = cure;
-	bill->unequip(0);
-	std::cout << std::endl;
-
-	bill->unequip(5);
-	std::cout << std::endl;
-
-	std::cout << "\n";
-
-	delete (tmp0);
-	delete (tmp1);
-	//delete (source);
-	delete (bill);
-	delete (john);
-
 	return (0);
 }

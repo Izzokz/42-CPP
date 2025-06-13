@@ -44,6 +44,8 @@ int	main(void)
 			cat1->getBrain()->addIdea("Mia...", i * 3);
 		const Animal	*dog2 = new Dog(*(Dog *)dog1);
 		const Animal	*cat2 = new Cat(*(Cat *)cat1);
+		cat->makeSound();
+		dog->makeSound();
 		std::cout << "DOG\n";
 		mindReader(dog->getBrain());
 		std::cout << "DOG1\n";
