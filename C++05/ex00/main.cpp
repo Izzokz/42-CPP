@@ -20,6 +20,7 @@ typedef struct s_brct
 
 int	main(void)
 {
+	std::cout << "\n\e[33;1m---| TEST 1 |---\e[0m" << std::endl;
 	{
 		try
 		{
@@ -39,6 +40,7 @@ int	main(void)
 				std::cout << "Unkown exception occured" << std::endl;
 		}
 	}
+	std::cout << "\n\e[33;1m---| TEST 2 |---\e[0m" << std::endl;
 	{
 		try
 		{
@@ -58,6 +60,7 @@ int	main(void)
 				std::cout << "Unkown exception occured" << std::endl;
 		}
 	}
+	std::cout << "\n\e[33;1m---| TEST 3 |---\e[0m" << std::endl;
 	{
 		try
 		{
@@ -77,6 +80,7 @@ int	main(void)
 				std::cout << "Unkown exception occured" << std::endl;
 		}
 	}
+	std::cout << "\n\e[33;1m---| TEST 4 |---\e[0m" << std::endl;
 	{
 		try
 		{
@@ -96,6 +100,7 @@ int	main(void)
 				std::cout << "Unkown exception occured" << std::endl;
 		}
 	}
+	std::cout << "\n\e[33;1m---| TEST 5 |---\e[0m" << std::endl;
 	{
 		try
 		{

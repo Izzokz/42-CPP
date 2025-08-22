@@ -11,21 +11,15 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 typedef struct s_brct
 {
 	std::string	name;
 	int			grade;
 }	t_brct;
-
-typedef struct s_form
-{
-	std::string		name;
-	unsigned char	s : 1;
-	unsigned char	sl;
-	unsigned char	el;
-}	t_form;
 
 int	main(void)
 {
@@ -136,8 +130,8 @@ int	main(void)
 	{
 		try
 		{
-			const t_brct	cheater = {"Jeannot", 0};
-			Form			a = Form("A'", 200, 5);
+			const t_brct			cheater = {"Jeannot", 0};
+			ShrubberyCreationForm	a = ShrubberyCreationForm("TARGET");
 
 			(*(Bureaucrat *)&cheater).signForm(a);
 		}
@@ -150,24 +144,80 @@ int	main(void)
 	{
 		try
 		{
-			const t_brct	cheater = {"Jeannot", 0};
-			const t_brct	badcheater = {"NotJeannot", 255};
-			Bureaucrat		notcheater = Bureaucrat("Jeannette", 16);
-			Form			a = Form("A'", 16, 5);
-			t_form			b = {"B'", 0, 150, 150};
-			t_form			wasItEvenSigned = {"C'", 1, 16, 5};
-			Form			d("D'", 16, 5);
+			const t_brct			cheater = {"Jeannot", 0};
+			const t_brct			badcheater = {"NotJeannot", 255};
+			Bureaucrat				notcheater = Bureaucrat("Jeannette", 16);
+			ShrubberyCreationForm	a = ShrubberyCreationForm("T1");
+			ShrubberyCreationForm	d("T2");
 
 			(*(Bureaucrat *)&cheater).signForm(a);
 			(*(Bureaucrat *)&badcheater).signForm(a);
-			(*(Bureaucrat *)&badcheater).signForm(*(Form *)&b);
-			(*(Bureaucrat *)&cheater).signForm(*(Form *)&b);
-			(*(Bureaucrat *)&cheater).signForm(*(Form *)&b);
-			notcheater.signForm(*(Form *)&wasItEvenSigned);
+			notcheater.executeForm(d);
 			std::cout << d << std::endl;
 			notcheater.signForm(d);
 			std::cout << d << std::endl;
-			std::cout << *(Form *)&wasItEvenSigned << std::endl;
+			(*(Bureaucrat *)&badcheater).executeForm(d);
+			notcheater.executeForm(d);
+		}
+		catch (std::exception &e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+	}
+	std::cout << "\n\e[33;1m---| TEST 8 |---\e[0m" << std::endl;
+	{
+		try
+		{
+			std::cout << "\e[33;1m-INIT-\e[0m" << std::endl;
+			t_brct				a = {"Olivier", 73};
+			t_brct				b = {"Olive", 46};
+			RobotomyRequestForm	A("Saaraah");
+			RobotomyRequestForm	B = A;
+			std::cout << "\e[33;1m-INIT'D-\e[0m" << std::endl;
+
+			std::cout << "\n\e[33;1m-Form A-\e[0m" << std::endl;
+			(*(Bureaucrat *)&a).signForm(A);
+			--(a.grade);
+			(*(Bureaucrat *)&a).signForm(A);
+			(*(Bureaucrat *)&a).executeForm(A);
+			(*(Bureaucrat *)&b).executeForm(A);
+			--(b.grade);
+			(*(Bureaucrat *)&b).executeForm(A);
+			a.grade = 3;
+			(*(Bureaucrat *)&a).signForm(A);
+			std::cout << "\e[33;1m-Form A End-\e[0m" << std::endl;
+			std::cout << "\n\e[33;1m-Form B-\e[0m" << std::endl;
+			std::cout << "B: " << B << std::endl;
+			(*(Bureaucrat *)&a).signForm(B);
+			std::cout << "B: " << B << std::endl;
+			(*(Bureaucrat *)&a).executeForm(B);
+			RobotomyRequestForm C("Haaraas");
+			B = C;
+			std::cout << "B: " << B << std::endl;
+			(*(Bureaucrat *)&a).executeForm(B);
+			(*(Bureaucrat *)&a).signForm(B);
+			(*(Bureaucrat *)&a).executeForm(B);
+			(*(Bureaucrat *)&a).signForm(B);
+			std::cout << "\e[33;1m-Form B End-\e[0m" << std::endl;
+			std::cout << "\n\e[33;1m-Loop B-\e[0m" << std::endl;
+			for (char u = -1; u < 10; ++u)
+				(*(Bureaucrat *)&a).executeForm(B);
+			std::cout << "\e[33;1m-Loop B End-\e[0m" << std::endl;
+		}
+		catch (std::exception &e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+	}
+	std::cout << "\n\e[33;1m---| TEST 9 |---\e[0m" << std::endl;
+	{
+		try
+		{
+			t_brct	a = {"Jeanne", 0};
+			PresidentialPardonForm	A((*(Bureaucrat *)&a).getName());
+
+			(*(Bureaucrat *)&a).signForm(A);
+			(*(Bureaucrat *)&a).executeForm(A);
 		}
 		catch (std::exception &e)
 		{
