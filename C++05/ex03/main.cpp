@@ -237,17 +237,17 @@ int	main(void)
 			for (char i = 0; i < 3; ++i)
 			{
 				*(*names + 2) = i + '0';
-				*(forms + i * 3) = (*(Intern *)&intern).makeForm("shrubbery creation", *names);
+				*(forms + i * 3) = (*(Intern *)intern).makeForm("shrubbery creation", *names);
 			}
 			for (char i = 0; i < 3; ++i)
 			{
 				*(*(names + 1) + 2) = i + '0';
-				*(forms + i * 3 + 1) = (*(Intern *)&intern).makeForm("robotomy request", *(names + 1));
+				*(forms + i * 3 + 1) = (*(Intern *)intern).makeForm("robotomy request", *(names + 1));
 			}
 			for (char i = 0; i < 3; ++i)
 			{
 				*(*(names + 2) + 2) = i + '0';
-				*(forms + i * 3 + 2) = (*(Intern *)&intern).makeForm("presidential pardon", *(names + 2));
+				*(forms + i * 3 + 2) = (*(Intern *)intern).makeForm("presidential pardon", *(names + 2));
 			}
 			for (char i = 0; i < 9; ++i)
 			{

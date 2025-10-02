@@ -3,7 +3,7 @@ NAME = megaphone
 SRC = megaphone.cpp
 OBJ = $(SRC:.cpp=.o)
 
-CCA = c++ -std=c++98 -Werror -Wall -Wextra
+CCA = c++ -std=c++98 -Werror -Wall -Wextra -g3
 
 all: $(NAME)
 

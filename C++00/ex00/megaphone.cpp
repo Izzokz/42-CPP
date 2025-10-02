@@ -11,19 +11,14 @@
 /* ************************************************************************** */
 
 #include <iostream>
+#include <cstdio>
 
-int	main(int argc, char *argv[])
+int	main(int c, char *v[])
 {
-	std::string	cpy;
-
-	if (argc == 1)
+	if (c == 1)
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
-	while (*(++argv))
-	{
-		cpy = std::string(*argv);
-		for (std::string::iterator iter = cpy.begin(); iter != cpy.end(); iter++)
-			std::cout << (char)std::toupper(*iter);
-	}
-	std::cout << '\n';
-	return (1);
+	while (--c + (0 * (long)--*++v)) // Optimized by compiler (no calculation)
+		while (*++*v)
+			std::putchar(std::toupper(**v)); // Faster than std::cout
+	std::putchar('\n'); // Faster than std::cout but does not flush stdout
 }
