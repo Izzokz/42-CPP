@@ -231,23 +231,22 @@ int	main(void)
 		{
 			AForm		*forms[9];
 			t_brct		a = {"Oui", 0};
-			const char	intern = 0;
 			char		names[3][4] = {{'s', 'c', '\0', '\0'}, {'r', 'r', '\0', '\0'}, {'p', 'p', '\0', '\0'}};
 
 			for (char i = 0; i < 3; ++i)
 			{
 				*(*names + 2) = i + '0';
-				*(forms + i * 3) = (*(Intern *)intern).makeForm("shrubbery creation", *names);
+				*(forms + i * 3) = (*(Intern *)69).makeForm("shrubbery creation", *names);
 			}
 			for (char i = 0; i < 3; ++i)
 			{
 				*(*(names + 1) + 2) = i + '0';
-				*(forms + i * 3 + 1) = (*(Intern *)intern).makeForm("robotomy request", *(names + 1));
+				*(forms + i * 3 + 1) = (*(Intern *)0).makeForm("robotomy request", *(names + 1));
 			}
 			for (char i = 0; i < 3; ++i)
 			{
 				*(*(names + 2) + 2) = i + '0';
-				*(forms + i * 3 + 2) = (*(Intern *)intern).makeForm("presidential pardon", *(names + 2));
+				*(forms + i * 3 + 2) = (*(Intern *)30035).makeForm("presidential pardon", *(names + 2));
 			}
 			for (char i = 0; i < 9; ++i)
 			{
