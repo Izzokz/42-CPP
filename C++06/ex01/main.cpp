@@ -19,7 +19,7 @@ void	printData(const Data *const &d, const std::string &name = "test")
 	std::cout << "  i      = " << d->i << '\n';
 	std::cout << "  iP     = " << d->iP << '\n';
 
-	std::cout << "  c      = " << (int)d->c << '\n';
+	std::cout << "  c      = " << (const int)d->c << '\n';
 
 	std::cout << "  str    = " << d->str << '\n';
 	std::cout << "  strPtr = " << d->strPtr << '\n';
@@ -40,11 +40,11 @@ int	main(void)
 	uintptr_t	ser = Serializer::serialize(&test);
 	Data		*same = Serializer::deserialize(ser);
 
-	std::cout << "test: " << (void *)&test << '\n';
-	std::cout << "ser: " << (void *)ser << '\n';
-	std::cout << "same: " << (void *)same << '\n';
+	std::cout << "test: " << (const void *const &)&test << '\n';
+	std::cout << "ser: " << (const void *const &)ser << '\n';
+	std::cout << "same: " << (const void *const &)same << '\n';
 
 	printData(&test, "test");
-	printData((Data *)ser, "ser");
+	printData((const Data *const &)ser, "ser");
 	printData(same, "same");
 }
