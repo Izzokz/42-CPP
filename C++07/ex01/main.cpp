@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <iostream>
-#include <algorithm>
+#include <bits/stdc++.h>
 #include "iter.hpp"
 
 static inline void ft_putchar(const char &c)
