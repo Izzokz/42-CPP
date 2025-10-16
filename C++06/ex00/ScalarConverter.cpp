@@ -49,7 +49,8 @@ static inline char	ft_isCharacter(const std::string &rep)
 	const std::size_t	&size = rep.size();
 	const char			&firstChar = (size > 0 ? rep[0] : 0);
 
-	return (size == 1 && ((firstChar >= 32 && firstChar < '0') || (firstChar > '9' && firstChar < 127)));
+	return ((size == 1 && ((firstChar >= 32 && firstChar < '0') || (firstChar > '9' && firstChar < 127)))
+		|| (size == 2 && firstChar >= '0' && firstChar <= '9' && rep[1] == 'c'));
 }
 
 void	ScalarConverter::convert(const std::string &rep)
