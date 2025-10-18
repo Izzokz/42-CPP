@@ -11,23 +11,25 @@
 /* ************************************************************************** */
 
 #include "Array.hpp"
+#include <stdint.h>
 
-template <typename T> const typename Array<T>::OutOfBoundsException	Array<T>::OOBE;
-template <typename T> const typename Array<T>::EmptyArrayException	Array<T>::EAE;
+template <typename T> const typename Array<T>::OutOfBoundsException		Array<T>::OOBE;
+template <typename T> const typename Array<T>::EmptyArrayException		Array<T>::EAE;
+template <typename T> const typename Array<T>::SizeMaxReachedException	Array<T>::SMRE;
 
-template <typename T> Array<T>::Array(void) : _sizeofT(sizeof(T))
+template <typename T> Array<T>::Array(void)
 {
 	_arr = new T[0]();
 	_size = 0;
 }
 
-template <typename T> Array<T>::Array(const std::size_t &n) : _sizeofT(sizeof(T))
+template <typename T> Array<T>::Array(const std::size_t &n)
 {
 	_arr = new T[n]();
 	_size = n;
 }
 
-template <typename T> Array<T>::Array(const Array &cpy) : _sizeofT(sizeof(T))
+template <typename T> Array<T>::Array(const Array &cpy)
 {
 	_arr = 0;
 	*this = cpy;
@@ -51,12 +53,13 @@ template <typename T> Array<T>	&Array<T>::operator=(const Array &cpy)
 
 template <typename T> Array<T>	Array<T>::operator+(const Array &add) const
 {
-	Array	newArr(_size + add._size);
+	if (_size == SIZE_MAX)
+		return (*this);
+	const std::size_t	N = SIZE_MAX - _size > add._size ? _size + add._size : SIZE_MAX;
+	Array				newArr(N);
 
-	for (std::size_t i = 0; i < _size; ++i)
-		*(newArr._arr + i) = *(_arr + i);
-	for (std::size_t i = 0; i < add._size; ++i)
-		*(newArr._arr + i + _size) = *(add._arr + i);
+	for (std::size_t i = 0; i < N; ++i)
+		*(newArr._arr + i) = i < _size ? *(_arr + i) : *(add._arr + i - _size);
 	return (newArr);
 }
 
@@ -67,6 +70,8 @@ template <typename T> Array<T>	&Array<T>::operator+=(const Array &add)
 
 template <typename T> void	Array<T>::pushBack(const T &obj)
 {
+	if (_size == SIZE_MAX)
+		throw (SMRE);
 	T *const	oldArr = _arr;
 	_arr = new T[_size + 1];
 	for (std::size_t i = 0; i < _size; ++i)
@@ -77,6 +82,8 @@ template <typename T> void	Array<T>::pushBack(const T &obj)
 
 template <typename T> void	Array<T>::pushFront(const T &obj)
 {
+	if (_size == SIZE_MAX)
+		throw (SMRE);
 	T *const		oldArr = _arr;
 	_arr = new T[_size + 1];
 	{
