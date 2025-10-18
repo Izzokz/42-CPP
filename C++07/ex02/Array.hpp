@@ -24,7 +24,7 @@ template <typename T> class	Array
 		{
 			const char	*what(void) const throw()
 			{
-				return ("OutOfBoundsException: Index Out Of Bounds");
+				return ("OutOfBoundsException: Index out of bounds");
 			}
 		};
 		class	EmptyArrayException : public std::exception
