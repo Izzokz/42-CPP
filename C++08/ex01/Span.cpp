@@ -45,6 +45,16 @@ Span	&Span::operator=(const Span &cpy)
 	return (*this);
 }
 
+Span::const_iterator	Span::begin(void) const
+{
+	return (const_iterator(_vector.begin()));
+}
+
+Span::const_iterator	Span::end(void) const
+{
+	return (const_iterator(_vector.end()));
+}
+
 void	Span::addNumber(const int &n)
 {
 	if (_vector.size() == _N)

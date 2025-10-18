@@ -13,6 +13,7 @@
 #pragma once
 
 #include <vector>
+#include <iterator>
 
 class	Span
 {
@@ -43,8 +44,40 @@ class	Span
 		Span(const Span &cpy);
 	public: /* -Operator- */
 		Span									&operator=(const Span &cpy);
+	public: /* -Const Iterator- */
+		class	const_iterator
+		{
+			private: /* -Data- */
+				std::vector<int>::const_iterator		_it;
+
+			public: /* -Constructor- */
+				const_iterator(std::vector<int>::const_iterator it) : _it(it) {}
+			public: /* -Iterator type- */
+				typedef std::ptrdiff_t					difference_type;
+				typedef const int						value_type;
+				typedef const int						*pointer;
+				typedef const int						&reference;
+				typedef std::random_access_iterator_tag	iterator_category;
+			public: /* -Operators- */
+				const int								&operator*(void) const {return (*_it); };
+				char									operator==(const const_iterator &comp) const { return (_it == comp._it); };
+				char									operator!=(const const_iterator &comp) const { return (_it != comp._it); };
+				const_iterator							&operator++(void) { ++_it; return (*this); };
+				const_iterator							operator++(int) { const_iterator tmp = _it; ++_it; return (tmp); };
+				const_iterator							&operator--(void) { --_it; return (*this); };
+				const_iterator							operator--(int) { const_iterator tmp = _it; --_it; return (tmp); };
+				const_iterator							operator+(const difference_type &i) const { return (const_iterator(_it + i)); };
+				const_iterator							operator-(const difference_type &i) const { return (const_iterator(_it - i)); };
+				difference_type							operator-(const const_iterator &it) const { return (_it - it._it); };
+				const_iterator							&operator+=(const std::size_t &i) { return (*this = *this + i); };
+				const_iterator							&operator-=(const std::size_t &i) { return (*this = *this - i); };
+				const int								&operator[](const std::size_t &i) const { return (*(_it + i)); };
+		};
 	public: /* -Methods- */
+		const_iterator							begin(void) const;
+		const_iterator							end(void) const;
 		void									addNumber(const int &n);
+		template <typename IT> void				assign(IT begin, IT end);
 		void									sort(void);
 		char									alreadySorted(void) const;
 		unsigned int							shortestSpan(void);
@@ -53,3 +86,5 @@ class	Span
 		static const NoSpanException			NSE;
 		static const SizeMaxReachedException	SMRE;
 };
+
+#include "Span.tpp"

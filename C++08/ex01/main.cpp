@@ -53,6 +53,17 @@ int	main(void)
 		std::cout << e.what() << std::endl;
 	}
 
+	Span::const_iterator	it = sp.begin();
+	std::cout << "[BEHAVIOUR] Span::shortestSpan() and Span::longestSpan() use Span::sort() so the order changes." << std::endl;
+	std::cout << "SIZE: " << (std::size_t)(sp.end() - it) << "\nFIRST ELEMENT: " << *it << "\nTHIRD ELEMENT: " << it[2];
+	std::cout << "\nADDR: " << &*it << " VAL: " << it[0];
+	std::cout << "\nADDR: " << &*(++it += 3) << " VAL: " << (--(it -= 3))[4] << std::endl;
+/*
+	std::cout << it[-1] << std::endl; // Error expected
+	std::cout << it[-10] << std::endl; // Error expected
+*/
+	std::cout << (it + 16)[-13] << std::endl;
+
 	Span	nosp;
 
 	try
@@ -105,4 +116,42 @@ int	main(void)
 		std::cout << bigSPAN.longestSpan();
 	}
 	std::cout << std::endl;
+
+	Span	bigSPANBis(BIGNO);
+
+	try
+	{
+		bigSPANBis.assign(bigSPAN.begin(), bigSPAN.end());
+		std::cout << bigSPANBis.shortestSpan() << std::endl;
+		std::cout << bigSPANBis.longestSpan() << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+
+	Span	notBigSPAN(BIGNO - 1);
+
+	try
+	{
+		notBigSPAN.assign(bigSPAN.begin(), bigSPAN.end());
+		std::cout << notBigSPAN.shortestSpan() << std::endl;
+		std::cout << notBigSPAN.longestSpan() << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+		try
+		{
+			std::cout << notBigSPAN.shortestSpan() << std::endl;
+			std::cout << notBigSPAN.longestSpan() << std::endl;
+			notBigSPAN.assign(bigSPAN.end(), bigSPAN.end());
+			std::cout << "SUCCESS" << std::endl;
+			notBigSPAN.assign(bigSPAN.end() - 1, bigSPAN.end());
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+	}
 }
