@@ -141,7 +141,7 @@ int	main(void)
 	catch (const std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
-		try
+		try/*ception*/
 		{
 			std::cout << notBigSPAN.shortestSpan() << std::endl;
 			std::cout << notBigSPAN.longestSpan() << std::endl;
