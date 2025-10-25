@@ -40,13 +40,9 @@ int	main(void)
 			std::cout << *br << std::endl;
 			std::cout << *(br + 1) << std::endl;
 		}
-		catch (std::exception &e)
+		catch (const std::exception &e)
 		{
-			if (typeid(e) == typeid(Bureaucrat::GradeTooHighException)
-				|| typeid(e) == typeid(Bureaucrat::GradeTooLowException))
-				std::cout << e.what() << std::endl;
-			else
-				std::cout << "Unkown exception occured" << std::endl;
+			std::cout << e.what() << std::endl;
 		}
 	}
 	std::cout << "\n\e[33;1m---| TEST 2 |---\e[0m" << std::endl;
@@ -60,13 +56,9 @@ int	main(void)
 			std::cout << *br << std::endl;
 			std::cout << *(br + 1) << std::endl;
 		}
-		catch (std::exception &e)
+		catch (const std::exception &e)
 		{
-			if (typeid(e) == typeid(Bureaucrat::GradeTooHighException)
-				|| typeid(e) == typeid(Bureaucrat::GradeTooLowException))
-				std::cout << e.what() << std::endl;
-			else
-				std::cout << "Unkown exception occured" << std::endl;
+			std::cout << e.what() << std::endl;
 		}
 	}
 	std::cout << "\n\e[33;1m---| TEST 3 |---\e[0m" << std::endl;
@@ -80,13 +72,9 @@ int	main(void)
 			std::cout << *br << std::endl;
 			std::cout << *(br + 1) << std::endl;
 		}
-		catch (std::exception &e)
+		catch (const std::exception &e)
 		{
-			if (typeid(e) == typeid(Bureaucrat::GradeTooHighException)
-				|| typeid(e) == typeid(Bureaucrat::GradeTooLowException))
-				std::cout << e.what() << std::endl;
-			else
-				std::cout << "Unkown exception occured" << std::endl;
+			std::cout << e.what() << std::endl;
 		}
 	}
 	std::cout << "\n\e[33;1m---| TEST 4 |---\e[0m" << std::endl;
@@ -100,13 +88,9 @@ int	main(void)
 			std::cout << *br << std::endl;
 			std::cout << *(br + 1) << std::endl;
 		}
-		catch (std::exception &e)
+		catch (const std::exception &e)
 		{
-			if (typeid(e) == typeid(Bureaucrat::GradeTooHighException)
-				|| typeid(e) == typeid(Bureaucrat::GradeTooLowException))
-				std::cout << e.what() << std::endl;
-			else
-				std::cout << "Unkown exception occured" << std::endl;
+			std::cout << e.what() << std::endl;
 		}
 	}
 	std::cout << "\n\e[33;1m---| TEST 5 |---\e[0m" << std::endl;
@@ -127,12 +111,52 @@ int	main(void)
 			d = *(Bureaucrat *)&a;
 			std::cout << d << std::endl;
 		}
-		catch (std::exception &e)
+		catch (const std::exception &e)
 		{
 			std::cout << e.what() << std::endl;
 		}
 	}
 	std::cout << "\n\e[33;1m---| TEST 6 |---\e[0m" << std::endl;
+	{
+		Bureaucrat	a("1", 1);
+		Bureaucrat	b("150", 150);
+		std::cout << a << std::endl << b << std::endl;
+		try
+		{
+			++a;
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+		try
+		{
+			--b;
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+		try
+		{
+			while (1)
+				--a;
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << e.what() << '\n' << a << std::endl;
+		}
+		try
+		{
+			while (1)
+				++b;
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << e.what() << '\n' << b << std::endl;
+		}
+	}
+	std::cout << "\n\e[33;1m---| TEST 7 |---\e[0m" << std::endl;
 	{
 		try
 		{
@@ -141,12 +165,12 @@ int	main(void)
 
 			(*(Bureaucrat *)&cheater).signForm(a);
 		}
-		catch (std::exception &e)
+		catch (const std::exception &e)
 		{
 			std::cout << e.what() << std::endl;
 		}
 	}
-	std::cout << "\n\e[33;1m---| TEST 7 |---\e[0m" << std::endl;
+	std::cout << "\n\e[33;1m---| TEST 8 |---\e[0m" << std::endl;
 	{
 		try
 		{
@@ -169,7 +193,7 @@ int	main(void)
 			std::cout << d << std::endl;
 			std::cout << *(Form *)&wasItEvenSigned << std::endl;
 		}
-		catch (std::exception &e)
+		catch (const std::exception &e)
 		{
 			std::cout << e.what() << std::endl;
 		}

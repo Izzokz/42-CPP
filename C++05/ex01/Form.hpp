@@ -19,32 +19,34 @@ class	Bureaucrat;
 class	AlreadySignedException : public std::exception
 {
 	public:
-		const char	*what(void) const throw()
-		{
-			return ("Already Signed !");
-		}
+		const char	*what(void) const throw();
 };
 
 class	Form
 {
-	private:
+	private: /* -Data- */
 		const std::string	_name;
 		unsigned char		_signed : 1;
 		const unsigned char	_signLevel;
-		const unsigned char	_execLevel; // UNUSED
-	public:
+		const unsigned char	_execLevel; // UNUSED IN THIS EXERCISE
+
+	public: /* -CDstructors- */
 		Form(const std::string &name, const int &signLevel, const int &execLevel);
 		Form(const Form &cpy);
-		Form								&operator=(const Form &cpy);
 		~Form(void);
+	public: /* -Operator- */
+		Form								&operator=(const Form &cpy);
+	public: /* -Method- */
 		void								beSigned(const Bureaucrat &b);
-		unsigned char						getExecLevel(void) const;
-		unsigned char						getSignLevel(void) const;
-		std::string							getName(void) const;
+	public: /* -Getters- */
+		const unsigned char					&getExecLevel(void) const;
+		const unsigned char					&getSignLevel(void) const;
+		const std::string					&getName(void) const;
 		unsigned char						isSigned(void) const;
-		static const GradeTooLowException	GradeTooLowException;
-		static const GradeTooHighException	GradeTooHighException;
-		static const AlreadySignedException	AlreadySignedException;
+	public: /* -Exceptions- */
+		static const GradeTooLowException	GTLE;
+		static const GradeTooHighException	GTHE;
+		static const AlreadySignedException	ASE;
 };
 
 std::ostream	&operator<<(std::ostream &lhs, const Form &rhs);

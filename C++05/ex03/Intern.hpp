@@ -17,20 +17,20 @@
 class	UnknownFormException : public std::exception
 {
 	public:
-		const char	*what(void) const throw()
-		{
-			return ("Unknown Form Exception !");
-		}
+		const char	*what(void) const throw();
 };
 
 class	Intern
 {
-	private:
-		static const UnknownFormException	UnknownFormException;
-	public:
+	private: /* -Exception- */
+		static const UnknownFormException	UFE;
+
+	public: /* -CDstructors- */
 		Intern(void);
 		Intern(const Intern &cpy);
-		Intern								&operator=(const Intern &cpy);
 		~Intern(void);
+	public: /* -Operator- */
+		Intern								&operator=(const Intern &cpy);
+	public: /* -Method- */
 		AForm								*makeForm(const std::string &type, const std::string &target) const;
 };

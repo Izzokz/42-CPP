@@ -21,8 +21,7 @@ PresidentialPardonForm::PresidentialPardonForm(const std::string &target) : AFor
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &cpy) : AForm(cpy.getName(), cpy.getSignLevel(), cpy.getExecLevel())
 {
-	setSigned(cpy.isSigned());
-	_target = cpy._target;
+	*this = cpy;
 	std::cout << "PresidentialPardonForm copy constructor called\n";
 }
 
@@ -42,8 +41,8 @@ PresidentialPardonForm::~PresidentialPardonForm(void)
 void	PresidentialPardonForm::execute(const Bureaucrat &exe) const
 {
 	if (!isSigned())
-		throw (this->NotSignedException);
+		throw (NSE);
 	if (exe.getGrade() > getExecLevel())
-		throw (this->GradeTooLowException);
+		throw (GTLE);
 	std::cout << "\e[38;2;212;176;34m" << _target << " has been pardoned by Zaphod Beeblebrox.\e[0m" << std::endl;
 }

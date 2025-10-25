@@ -14,7 +14,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include <fstream>
 
-const CannotEditFileException	ShrubberyCreationForm::CannotEditFileException;
+const CannotEditFileException	ShrubberyCreationForm::CEFE;
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : AForm("ShrubberyCreationForm", 145, 137)
 {
@@ -24,8 +24,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : AForm(
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &cpy) : AForm(cpy.getName(), cpy.getSignLevel(), cpy.getExecLevel())
 {
-	_target = cpy._target;
-	setSigned(cpy.isSigned());
+	*this = cpy;
 	std::cout << "ShrubberyCreationForm copy constructor called" << std::endl;
 }
 
@@ -45,6 +44,9 @@ ShrubberyCreationForm::~ShrubberyCreationForm(void)
 static char	open_and_draw(const char *const target)
 {
 	std::ofstream			output(target, std::ios::trunc);
+	if (!output.is_open())
+		return (0);
+
 	const char *const		trees = "\n               ,@@@@@@@,\n\
        ,,,.   ,@@@@@@/@@,  .oo8888o.\n\
     ,&%%&%&&%,@@@@@/@@@@@@,8888\\88/8o\n\
@@ -56,8 +58,6 @@ static char	open_and_draw(const char *const target)
        |.|        | |         | |\n\
     \\\\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_\n";
 
-	if (!output.is_open())
-		return (0);
 	output << trees;
 	output.close();
 	return (1);
@@ -66,9 +66,14 @@ static char	open_and_draw(const char *const target)
 void	ShrubberyCreationForm::execute(const Bureaucrat &exe) const
 {
 	if (!isSigned())
-		throw (this->NotSignedException);
+		throw (NSE);
 	if (exe.getGrade() > getExecLevel())
-		throw (this->GradeTooLowException);
+		throw (GTLE);
 	if (!open_and_draw((_target + "_shrubbery").c_str()))
-		throw (this->CannotEditFileException);
+		throw (CEFE);
+}
+
+const char	*CannotEditFileException::what(void) const throw()
+{
+	return ("Cannot Edit File !");
 }

@@ -13,44 +13,44 @@
 #pragma once
 
 #include <iostream>
-#include <typeinfo>
 
 class	AForm;
 
 class	GradeTooHighException : public std::exception
 {
 	public:
-		const char	*what(void) const throw()
-		{
-			return ("Grade Too High !");
-		}
+		const char	*what(void) const throw();
 };
 
 class	GradeTooLowException : public std::exception
 {
 	public:
-		const char	*what(void) const throw()
-		{
-			return ("Grade Too Low !");
-		}
+		const char	*what(void) const throw();
 };
 
 class	Bureaucrat
 {
-	private:
-		const std::string	_name;
-		unsigned char		_grade;
-	public:
+	private: /* -Data- */
+		const std::string					_name;
+		unsigned char						_grade;
+
+	public: /* -CDstructors- */
 		Bureaucrat(const std::string &name, const int &grade);
 		~Bureaucrat(void);
 		Bureaucrat(const Bureaucrat &cpy);
+	public: /* -Operators- */
 		Bureaucrat							&operator=(const Bureaucrat &cpy);
-		unsigned char						getGrade(void) const;
-		const std::string					getName(void) const;
-		void								signForm(AForm &form) const;
-		void								executeForm(const AForm &form) const;
-		static const GradeTooHighException	GradeTooHighException;
-		static const GradeTooLowException	GradeTooLowException;
+		Bureaucrat							&operator++(void);
+		Bureaucrat							&operator--(void);
+	public: /* -Getters- */
+		const unsigned char					&getGrade(void) const;
+		const std::string					&getName(void) const;
+	public: /* -Methods- */
+		void								signForm(AForm &) const;
+		void								executeForm(const AForm &) const;
+	public: /* -Exceptions- */
+		static const GradeTooHighException	GTHE;
+		static const GradeTooLowException	GTLE;
 };
 
 std::ostream	&operator<<(std::ostream &lhs, const Bureaucrat &rhs);

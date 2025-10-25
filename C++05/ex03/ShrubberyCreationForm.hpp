@@ -19,21 +19,21 @@ class	Bureaucrat;
 class	CannotEditFileException : public std::exception
 {
 	public:
-		const char	*what(void) const throw()
-		{
-			return ("Cannot Edit File !");
-		}
+		const char	*what(void) const throw();
 };
 
 class	ShrubberyCreationForm : virtual public AForm
 {
-	private:
+	private: /* -Data- */
 		std::string								_target;
-		static const CannotEditFileException	CannotEditFileException;
-	public:
+		static const CannotEditFileException	CEFE;
+
+	public: /* -CDstructors- */
 		ShrubberyCreationForm(const std::string &target);
 		ShrubberyCreationForm(const ShrubberyCreationForm &cpy);
-		ShrubberyCreationForm					&operator=(const ShrubberyCreationForm &cpy);
 		~ShrubberyCreationForm(void);
+	public: /* -Operator- */
+		ShrubberyCreationForm					&operator=(const ShrubberyCreationForm &cpy);
+	public: /* -Method- */
 		void									execute(const Bureaucrat &exe) const;
 };

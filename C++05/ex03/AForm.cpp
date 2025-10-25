@@ -13,17 +13,17 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 
-const GradeTooHighException		AForm::GradeTooHighException;
-const GradeTooLowException		AForm::GradeTooLowException;
-const AlreadySignedException	AForm::AlreadySignedException;
-const NotSignedException		AForm::NotSignedException;
+const GradeTooHighException		AForm::GTHE;
+const GradeTooLowException		AForm::GTLE;
+const AlreadySignedException	AForm::ASE;
+const NotSignedException		AForm::NSE;
 
 AForm::AForm(const std::string &name, const int &signLevel, const int &execLevel) : _name(name), _signLevel(signLevel), _execLevel(execLevel)
 {
 	if (_signLevel < 1 || _execLevel < 1)
-		throw (AForm::GradeTooHighException);
+		throw (GTHE);
 	if (_signLevel > 150 || _execLevel > 150)
-		throw (AForm::GradeTooLowException);
+		throw (GTLE);
 	_signed = 0;
 	std::cout << "AForm default constructor called" << std::endl;
 }
@@ -31,9 +31,9 @@ AForm::AForm(const std::string &name, const int &signLevel, const int &execLevel
 AForm::AForm(const AForm &cpy) : _name(cpy._name), _signLevel(cpy._signLevel), _execLevel(cpy._execLevel)
 {
 	if (_signLevel < 1 || _execLevel < 1)
-		throw (AForm::GradeTooHighException);
+		throw (GTHE);
 	if (_signLevel > 150 || _execLevel > 150)
-		throw (AForm::GradeTooLowException);
+		throw (GTLE);
 	std::cout << "AForm copy constructor called" << std::endl;
 }
 
@@ -52,9 +52,9 @@ AForm::~AForm(void)
 void	AForm::beSigned(const Bureaucrat &br)
 {
 	if (_signed)
-		throw (this->AlreadySignedException);
-	if (br.getGrade() > this->getSignLevel())
-		throw (this->GradeTooLowException);
+		throw (ASE);
+	if (br.getGrade() > _signLevel)
+		throw (GTLE);
 	_signed = 1;
 }
 
@@ -63,17 +63,17 @@ inline unsigned char	AForm::isSigned(void) const
 	return (_signed);
 }
 
-inline unsigned char	AForm::getSignLevel(void) const
+inline const unsigned char	&AForm::getSignLevel(void) const
 {
 	return (_signLevel);
 }
 
-inline unsigned char	AForm::getExecLevel(void) const
+inline const unsigned char	&AForm::getExecLevel(void) const
 {
 	return (_execLevel);
 }
 
-inline std::string	AForm::getName(void) const
+inline const std::string	&AForm::getName(void) const
 {
 	return (_name);
 }
@@ -92,4 +92,14 @@ std::ostream	&operator<<(std::ostream &lhs, const AForm &rhs)
 		lhs << "Not signed (";
 	lhs << (int)rhs.getSignLevel() << " to sign, " << (int)rhs.getExecLevel() << " to execute)";
 	return (lhs);
+}
+
+const char	*AlreadySignedException::what(void) const throw()
+{
+	return ("Already Signed !");
+}
+
+const char	*NotSignedException::what(void) const throw()
+{
+	return ("Not Signed !");
 }

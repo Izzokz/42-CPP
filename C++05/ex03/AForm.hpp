@@ -21,44 +21,43 @@ class	Bureaucrat;
 class	AlreadySignedException : public std::exception
 {
 	public:
-		const char	*what(void) const throw()
-		{
-			return ("Already Signed !");
-		}
+		const char	*what(void) const throw();
 };
 
 class	NotSignedException : public std::exception
 {
 	public:
-		const char	*what(void) const throw()
-		{
-			return ("Not Signed !");
-		}
+		const char	*what(void) const throw();
 };
 
 class	AForm
 {
-	private:
-		const std::string	_name;
-		unsigned char		_signed : 1;
-		const unsigned char	_signLevel;
-		const unsigned char	_execLevel;
+	private: /* -Data- */
+		const std::string					_name;
+		unsigned char						_signed : 1;
+		const unsigned char					_signLevel;
+		const unsigned char					_execLevel;
+
 	protected:
-		void				setSigned(const char &i);
-		static const GradeTooLowException	GradeTooLowException;
-		static const GradeTooHighException	GradeTooHighException;
-		static const AlreadySignedException	AlreadySignedException;
-		static const NotSignedException		NotSignedException;
-	public:
+		void								setSigned(const char &i);
+		static const GradeTooLowException	GTLE;
+		static const GradeTooHighException	GTHE;
+		static const AlreadySignedException	ASE;
+		static const NotSignedException		NSE;
+
+	public: /* -CDstructors- */
 		AForm(const std::string &name, const int &signLevel, const int &execLevel);
 		AForm(const AForm &cpy);
-		AForm								&operator=(const AForm &cpy);
 		virtual ~AForm(void);
+	public: /* -Operator- */
+		AForm								&operator=(const AForm &cpy);
+	public: /* -Methods- */
 		virtual void						beSigned(const Bureaucrat &b);
 		virtual void						execute(const Bureaucrat &exe) const = 0;
-		virtual unsigned char				getExecLevel(void) const;
-		virtual unsigned char				getSignLevel(void) const;
-		virtual std::string					getName(void) const;
+	public: /* -Getters- */
+		virtual const unsigned char			&getExecLevel(void) const;
+		virtual const unsigned char			&getSignLevel(void) const;
+		virtual const std::string			&getName(void) const;
 		virtual unsigned char				isSigned(void) const;
 };
 

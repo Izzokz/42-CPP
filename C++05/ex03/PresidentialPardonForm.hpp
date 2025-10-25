@@ -16,12 +16,15 @@
 
 class	PresidentialPardonForm : public AForm
 {
-	private:
+	private: /* -Data- */
 		std::string				_target;
-	public:
+
+	public: /* -CDstructors- */
 		PresidentialPardonForm(const std::string &target);
 		PresidentialPardonForm(const PresidentialPardonForm &cpy);
-		PresidentialPardonForm	&operator=(const PresidentialPardonForm &cpy);
 		~PresidentialPardonForm(void);
+	public: /* -Operator- */
+		PresidentialPardonForm	&operator=(const PresidentialPardonForm &cpy);
+	public: /* -Method- */
 		void					execute(const Bureaucrat &exe) const;
 };

@@ -16,12 +16,15 @@
 
 class	RobotomyRequestForm : public AForm
 {
-	private:
+	private: /* -Data- */
 		std::string	_target;
-	public:
+
+	public: /* -CDstructors- */
 		RobotomyRequestForm(const std::string &target);
 		RobotomyRequestForm(const RobotomyRequestForm &cpy);
-		RobotomyRequestForm	&operator=(const RobotomyRequestForm &cpy);
 		~RobotomyRequestForm(void);
+	public: /* -Operator- */
+		RobotomyRequestForm	&operator=(const RobotomyRequestForm &cpy);
+	public: /* -Method- */
 		void		execute(const Bureaucrat &exe) const;
 };

@@ -15,7 +15,7 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
-const UnknownFormException	Intern::UnknownFormException;
+const UnknownFormException	Intern::UFE;
 
 Intern::Intern(void)
 {
@@ -67,16 +67,21 @@ AForm	*Intern::makeForm(const std::string &name, const std::string &target) cons
 		{
 			if (name == *(list + type))
 			{
-				newForm = ((*(formTypes + type))(target));
+				newForm = (*(formTypes + type))(target);
 				std::cout << "Intern creates " << newForm->getName() << std::endl;
 				return (newForm);
 			}
 		}
-		throw (this->UnknownFormException);
+		throw (UFE);
 	}
 	catch (std::exception &e)
 	{
 		std::cout << "Intern couldn't create " << target << " because " << e.what() << std::endl;
 	}
 	return (NULL);
+}
+
+const char	*UnknownFormException::what(void) const throw()
+{
+	return ("Unknown Form Exception !");
 }

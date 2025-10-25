@@ -21,8 +21,7 @@ RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm("Rob
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &cpy) : AForm(cpy.getName(), cpy.getSignLevel(), cpy.getExecLevel())
 {
-	_target = cpy._target;
-	setSigned(cpy.isSigned());
+	*this = cpy;
 	std::cout << "RobotomyRequestForm copy constructor called\n";
 }
 
@@ -44,9 +43,9 @@ void	RobotomyRequestForm::execute(const Bureaucrat &exe) const
 	static char	fiftyPercent = 0;
 
 	if (!isSigned())
-		throw (this->NotSignedException);
+		throw (NSE);
 	if (exe.getGrade() > getExecLevel())
-		throw (this->GradeTooLowException);
+		throw (GTLE);
 	std::cout << "*Beep Bop Beep Bop Bop*\n*Pam Pam Pam*" << std::endl;
 	if (!fiftyPercent)
 		std::cout << "\e[31mRobotomy failed on " << _target << ".\e[0m" << std::endl;
