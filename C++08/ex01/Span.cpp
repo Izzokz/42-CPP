@@ -104,3 +104,86 @@ unsigned int	Span::longestSpan(void)
 		sort();
 	return ((unsigned int)(_vector[_vector.size() - 1] - _vector[0]));
 }
+
+const char	*Span::NoSpanException::what(void) const throw()
+{
+	return ("NoSpanException: No span can be established (not enough data)");
+}
+
+const char	*Span::SizeMaxReachedException::what(void) const throw()
+{
+	return ("SizeMaxReachedException: Capacity is full");
+}
+
+const int	&Span::const_iterator::operator*(void) const
+{
+	return (*_it);
+}
+
+char	Span::const_iterator::operator==(const const_iterator &comp) const
+{
+	return (_it == comp._it);
+}
+
+char	Span::const_iterator::operator!=(const const_iterator &comp) const
+{
+	return (_it != comp._it);
+}
+
+Span::const_iterator	&Span::const_iterator::operator++(void)
+{
+	++_it;
+	return (*this);
+}
+
+Span::const_iterator	Span::const_iterator::operator++(int)
+{
+	Span::const_iterator	tmp = _it;
+
+	++_it;
+	return (tmp);
+}
+
+Span::const_iterator	&Span::const_iterator::operator--(void)
+{
+	--_it;
+	return (*this);
+}
+
+Span::const_iterator	Span::const_iterator::operator--(int)
+{
+	Span::const_iterator	tmp = _it;
+
+	--_it;
+	return (tmp);
+}
+
+Span::const_iterator	Span::const_iterator::operator+(const difference_type &i) const
+{
+	return (const_iterator(_it + i));
+}
+
+Span::const_iterator	Span::const_iterator::operator-(const difference_type &i) const
+{
+	return (const_iterator(_it - i));
+}
+
+Span::const_iterator::difference_type	Span::const_iterator::operator-(const Span::const_iterator &it) const
+{
+	return (_it - it._it);
+}
+
+Span::const_iterator	&Span::const_iterator::operator+=(const difference_type &i)
+{
+	return (*this = *this + i);
+}
+
+Span::const_iterator	&Span::const_iterator::operator-=(const difference_type &i)
+{
+	return (*this = *this - i);
+}
+
+const int	&Span::const_iterator::operator[](const std::size_t &i) const
+{
+	return (*(_it + i));
+}

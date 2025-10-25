@@ -59,8 +59,8 @@ int	main(void)
 	std::cout << "\nADDR: " << &*it << " VAL: " << it[0];
 	std::cout << "\nADDR: " << &*(++it += 3) << " VAL: " << (--(it -= 3))[4] << std::endl;
 /*
-	std::cout << it[-1] << std::endl; // Error expected
-	std::cout << it[-10] << std::endl; // Error expected
+	std::cout << it[-1] << std::endl; // Error expected but compiles
+	std::cout << it[-10] << std::endl; // Error expected but compiles
 */
 	std::cout << (it + 16)[-13] << std::endl;
 
