@@ -15,6 +15,7 @@
 #include <iostream>
 #include <stdint.h>
 
+// Used for tests
 typedef struct Data
 {
 	int			i;
@@ -26,11 +27,11 @@ typedef struct Data
 
 class	Serializer
 {
-	private:
-		Serializer(void) {};
-		~Serializer(void) {};
+	private: /* -Pure Static Class- */
+		Serializer(void) { };
+		~Serializer(void) { };
 
-	public:
+	public: /* -Methods- */
 		static uintptr_t	serialize(const Data *const &ptr);
 		static Data			*deserialize(const uintptr_t &raw);
 };

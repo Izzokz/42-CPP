@@ -16,10 +16,10 @@
 
 class	ScalarConverter
 {
-	private: /* -Uninstantiable Class Hack- */
-		ScalarConverter(void) {};
-		~ScalarConverter(void) {};
+	private: /* -Pure Static Class- */
+		ScalarConverter(void) { };
+		~ScalarConverter(void) { };
 
-	public:
+	public: /* -Method- */
 		static void	convert(const std::string &);
 };

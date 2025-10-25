@@ -14,10 +14,19 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
+#include <ctime>
+
+static inline char	setRandom(void)
+{
+	std::srand(std::time(0));
+	return (0);
+}
 
 Base	*generate(void)
 {
-	char	n = std::rand() % 3;
+	static const char	set = setRandom();
+	(void) set;
+	char				n = std::rand() % 3;
 
 	if (n == 1)
 	{

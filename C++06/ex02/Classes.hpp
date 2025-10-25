@@ -18,9 +18,9 @@ class	Base
 		virtual ~Base(void) { };
 };
 
-class	A : public Base {};
-class	B : public Base {};
-class	C : public Base {};
+class	A : public Base { };
+class	B : public Base { };
+class	C : public Base { };
 
 Base	*generate(void);
 void	identify(const Base *const &p);
