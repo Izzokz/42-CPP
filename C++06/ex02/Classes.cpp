@@ -11,22 +11,13 @@
 /* ************************************************************************** */
 
 #include "Classes.hpp"
+#include "ft_rand.h"
 #include <cstdio>
-#include <cstdlib>
 #include <iostream>
-#include <ctime>
-
-static inline char	setRandom(void)
-{
-	std::srand(std::time(0));
-	return (0);
-}
 
 Base	*generate(void)
 {
-	static const char	set = setRandom();
-	(void) set;
-	char				n = std::rand() % 3;
+	char	n = ft_rand() % 3;
 
 	if (n == 1)
 	{
@@ -51,28 +42,19 @@ void	identify(const Base &p)
 {
 	try
 	{
-		const A	&transform = dynamic_cast<const A &>(p);
-		(void) transform;
-		std::putchar('A');
-		return ;
+		return ((void)std::putchar(*(int *)&dynamic_cast<const A &>(p) * 0 + 'A'));
 	}
 	catch (...) { }
 
 	try
 	{
-		const B &transform = dynamic_cast<const B &>(p);
-		(void) transform;
-		std::putchar('B');
-		return ;
+		return ((void) std::putchar(*(int *)&dynamic_cast<const B &>(p) * 0 + 'B'));
 	}
 	catch (...) { }
 
 	try
 	{
-		const C	&transform = dynamic_cast<const C &>(p);
-		(void) transform;
-		std::putchar('C');
-		return ;
+		return ((void) std::putchar(*(int *)&dynamic_cast<const C &>(p) * 0 + 'C'));
 	}
 	catch (...) { }
 }

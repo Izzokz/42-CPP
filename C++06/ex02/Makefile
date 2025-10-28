@@ -1,5 +1,5 @@
 NAME = IRT
-SRC = Classes.cpp main.cpp
+SRC = Classes.cpp ft_rand.cpp main.cpp
 OBJ = $(SRC:.cpp=.o)
 
 CPP = c++ -std=c++98 -Werror -Wextra -Wall -g3
