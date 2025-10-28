@@ -60,7 +60,7 @@ void	ScalarConverter::convert(const std::string &rep)
 	const int		i = static_cast<int>(d);
 
 	if (i >= 32 && i < 127)
-		std::cout << "char: " << static_cast<char>(i) << '\n';
+		std::cout << "char: '" << static_cast<char>(i) << "'\n";
 	else if (ft_isImpossible(d) || i > CHAR_MAX || i < CHAR_MIN)
 		std::cout << "char: impossible\n";
 	else
