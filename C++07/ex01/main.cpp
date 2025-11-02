@@ -14,21 +14,21 @@
 #include <bits/stdc++.h>
 #include "iter.hpp"
 
-static inline void ft_putchar(const char &c)
+static inline void	ft_putchar(const char &c)
 {
-    std::cout << c << '\n';
+	std::cout << c << '\n';
 }
 
-static inline int printString(const std::string &s)
+static inline int	printString(const std::string &s)
 {
-    std::cout << s << '\n';
-    return (1);
+	std::cout << s << '\n';
+	return (1);
 }
 
 static inline void toUpperCase(std::string &str)
 {
-    std::transform(str.begin(), str.end(), str.begin(),
-              ::toupper);
+	std::transform(str.begin(), str.end(), str.begin(),
+		::toupper);
 }
 
 int	main(void)
