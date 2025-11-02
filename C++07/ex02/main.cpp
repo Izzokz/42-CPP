@@ -77,17 +77,5 @@ int	main(void)
 	wahou[0].remove(1);
 	wahou.print();
 
-/*
-	try
-	{
-		Array<int>	a(-1);
-		a.pushFront(1);
-	}
-	catch (const std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-*/
-
 	std::cout << "\naEND" << std::endl;
 }
