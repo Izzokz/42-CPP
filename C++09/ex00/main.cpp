@@ -29,4 +29,3 @@ int	main(signed ac, char *av[])
 	while (--ac)
 		BitcoinExchange::getExchangeFromFile(*++av);
 }
-

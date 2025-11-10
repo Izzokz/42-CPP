@@ -32,4 +32,3 @@ class	BitcoinExchange
 		static void							getExchange(const std::string &date, const float &number);
 		static void							getExchangeFromFile(const std::string &file);
 };
-

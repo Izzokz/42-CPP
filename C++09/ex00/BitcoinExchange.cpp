@@ -20,6 +20,25 @@
 
 std::map<long, float>	BitcoinExchange::_db;
 
+static char	dateExists(const long &formatDate)
+{
+	int	d = formatDate % 100;
+	int	m = (formatDate / 100) % 100;
+	int	y = formatDate / 10000;
+
+	if (!m || m > 12 || !d)
+		return (0);
+	if (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12)
+		return (d <= 31);
+	if (m != 2)
+		return (d <= 30);
+	if (!(y % 400) || (!(y % 4) && y % 100))
+		return (d <= 29);
+	else
+		return (d <= 28);
+	return ((int)(long)dateExists);
+}
+
 static long	validDate(const std::string &date)
 {
 	std::size_t		pos = 0;
@@ -56,8 +75,7 @@ static long	validDate(const std::string &date)
 		}
 		pos = newPos + 1;
 	} while (1);
-	// test date possibility : if not valid return 0;
-	return (formatDate);
+	return (dateExists(formatDate) ? formatDate : 0);
 }
 
 static inline std::string	readFile(const std::string &file)
@@ -177,4 +195,3 @@ void	BitcoinExchange::getExchangeFromFile(const std::string &file)
 		}
 	}
 }
-
