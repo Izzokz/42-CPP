@@ -33,4 +33,8 @@ int	main(int argc, const char *const argv[])
 	}
 	fPm.print();
 	sPm.print();
+	fPm.sort();
+	sPm.sort();
+	fPm.print();
+	sPm.print();
 }

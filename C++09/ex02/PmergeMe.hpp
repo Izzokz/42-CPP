@@ -28,7 +28,7 @@ template <typename C> class	PmergeMe
 	public: /* -Methods- */
 		void		add(const unsigned int &i) { _ctn.push_back(i); };
 		std::size_t	size(void) const { return (_ctn.size()); };
-		void		merge(void);
+		void		sort(void);
 		void		print(void) const;
 };
 
