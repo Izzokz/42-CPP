@@ -97,9 +97,9 @@ template <typename C> void	PmergeMe<C>::sort(void)
 			{
 				std::size_t			tmpNStep = (field - *(g_jacobsthalNumbers + iter - 1)) * step;
 				if (pendPos + tmpNStep > csize)
-					field = ((pendPos + tmpNStep - 1) - csize) / step;
+					field = (csize - pendPos) / step;
 			}
-			std::size_t				n = field + fadd - *(g_jacobsthalNumbers + iter - 1) + 1;
+			std::size_t				n = field - *(g_jacobsthalNumbers + iter - 1) + 1;
 			char					fsub = 0;
 			while (--n)
 			{
