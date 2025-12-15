@@ -31,10 +31,11 @@ int	main(int argc, const char *const argv[])
 		fPm.add(current);
 		sPm.add(current);
 	}
-	fPm.print();
-	sPm.print();
+//	fPm.print();
+//	sPm.print();
 	fPm.sort();
 	sPm.sort();
 	fPm.print();
-	sPm.print();
+//	sPm.print();
+	std::cout << "IS SORTED SCORE = " << (int)(fPm.isSorted() + sPm.isSorted()) << std::endl;
 }

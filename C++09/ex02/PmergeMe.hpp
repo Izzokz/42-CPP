@@ -30,6 +30,7 @@ template <typename C> class	PmergeMe
 		std::size_t	size(void) const { return (_ctn.size()); };
 		void		sort(void);
 		void		print(void) const;
+		char		isSorted(void) const;
 };
 
 #include "PmergeMe.tpp"

@@ -24,11 +24,49 @@ template <typename C> void	PmergeMe<C>::print(void) const
 	std::cout << std::endl;
 }
 
+template <typename C> char	PmergeMe<C>::isSorted(void) const
+{
+	std::size_t	csize = size();
+	for (std::size_t i = 1; i < csize; ++i)
+	{
+		if (_ctn[i] < _ctn[i - 1])
+			return (0);
+	}
+	return (1);
+}
+
 inline void	ft_swap(unsigned &c1, unsigned &c2)
 {
 	unsigned	tmp = c1;
 	c1 = c2;
 	c2 = tmp;
+}
+
+template <typename C> void	ft_printDetailedCtn(C &ctn, const std::size_t &step, const std::size_t &pendPos)
+{
+	std::size_t	csize = ctn.size();
+	char		switchColor = 0;
+	std::size_t	endOfMain = pendPos - (pendPos % step) - 1;
+	std::size_t	diff = 0;
+	std::cout << "\033[45;1m";
+	for (std::size_t i = 0; i < csize; ++i)
+	{
+		std::cout << ctn[i];
+		if (i + 1 < csize)
+			std::cout << ' ';
+		if (i == endOfMain)
+			std::cout << "\033[41;1m";
+		if (i + 1 == pendPos)
+			diff = endOfMain - pendPos + 1;
+		if (!((i + 1) % step + diff))
+		{
+			if (i + 1 >= pendPos)
+				std::cout << ((switchColor = !switchColor) ? "\033[44;1m" : "\033[43;1m");
+			else if (i < endOfMain)
+				std::cout << ((switchColor = !switchColor) ? "\033[46;1m" : "\033[45;1m");
+		}
+	}
+	std::cout << "\033[0m" << std::endl;
 }
 
 template <typename C> void	ft_moveToEnd(C &ctn, const std::size_t &end, std::size_t size)
@@ -41,17 +79,15 @@ template <typename C> void	ft_moveToEnd(C &ctn, const std::size_t &end, std::siz
 	}
 }
 
-template <typename C> void	ft_moveTo(C &ctn, const std::size_t &end, std::size_t size, std::size_t to)
+template <typename C> void	ft_moveTo(C &ctn, std::size_t end, std::size_t size, std::size_t to)
 {
-	if (to > end - size)
-		to -= size + 1;
-	const std::size_t	pos = end - (++size - 2);
+	// No need to handle the case where <to> is larger than `end - (size - 1)` because it will never occur in this algorithm
+	const std::size_t	newEnd = end + 1;
+	++size;
 	while (--size)
 	{
-		ctn.insert(ctn.begin() + to, ctn[pos]);
-		std::cout << (pos + (to <= pos ? 1 : 0)) << std::endl;
-		ctn.erase(ctn.begin() + pos + (to <= pos ? 1 : 0));
-		++to;
+		ctn.insert(ctn.begin() + to, ctn[end]);
+		ctn.erase(ctn.begin() + newEnd);
 	}
 }
 
@@ -77,6 +113,8 @@ template <typename C> void	PmergeMe<C>::sort(void)
 		step *= 2;
 		doublestep *= 2;
 	}
+//	std::cout << "\033[31;1m[INIT] PAIRING\033[0m" << std::endl;
+//	print();
 	step /= 2;
 	while (step /= 2)
 	{
@@ -88,37 +126,45 @@ template <typename C> void	PmergeMe<C>::sort(void)
 			ft_moveToEnd(_ctn, getterPos += step, step);
 			pendPos -= step;
 		}
-		print();
+//		std::cout << "\033[31;1mSTART OF STEP [" << step << "]\033[0m" << std::endl;
+//		std::cout << "\033[31;1mPEND CREATED :\033[0m" << std::endl;
+//		print();
 		std::size_t					iter = 2;
-		std::size_t					fadd = 0;
 		while (pendPos < csize)
 		{
 			std::size_t				field = *(g_jacobsthalNumbers + ++iter);
-			{
-				std::size_t			tmpNStep = (field - *(g_jacobsthalNumbers + iter - 1)) * step;
-				if (pendPos + tmpNStep > csize)
-					field = (csize - pendPos) / step;
-			}
-			std::size_t				n = field - *(g_jacobsthalNumbers + iter - 1) + 1;
+			std::size_t				n = ((pendPos + ((field - *(g_jacobsthalNumbers + iter - 1)) * step) > csize) ? ((csize - pendPos) / step + 1) : field - *(g_jacobsthalNumbers + iter - 1) + 1);
 			char					fsub = 0;
+			std::size_t				fadd = 0;
 			while (--n)
 			{
 				const unsigned		val = _ctn[pendPos + step * n - 1];
-				std::size_t			move = step * (field + fadd - fsub);
+				std::size_t			initMove = step * (field + fadd - fsub);
+				std::size_t			move;
+//				std::cout << "INIT MOVE = " << initMove << ", PEND POS = " << pendPos << std::endl;
+				if (initMove > pendPos)
+					initMove -= step;
+				move = initMove;
 				while (move)
 				{
 					if (_ctn[move - 1] <= val)
 						break ;
 					move -= step;
 				}
+				std::cout << "MOVING B" << (n + 1) << " TO " << move << std::endl;
+				ft_printDetailedCtn(_ctn, step, pendPos);
+//				std::cout << "N = " << n << ", FIELD = " << (field + fadd + fsub) << std::endl;
 				ft_moveTo(_ctn, pendPos + (step * n) - 1, step, move);
+//				std::cout << "ATFER MOVE:\n";
+//				print();
 				pendPos += step;
-				if (move / step == field + fadd - fsub)
+				if (initMove == move)
 					fsub = 1;
 				else
 					fsub = 0;
 				++fadd;
 			}
 		}
+//		std::cout << "\033[31;1mEND OF STEP [" << step << "]\033[0m" << std::endl;
 	}
 }
