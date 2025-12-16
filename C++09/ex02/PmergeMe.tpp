@@ -117,17 +117,21 @@ template <typename C> void	PmergeMe<C>::sort(void)
 //	print();
 	while (step /= 2)
 	{
-		// TODO : Ah.... Maybe add (csize / step) excluded elements to "missing"... if I remember correctly...
 		if (csize / step < 3)
 			continue ;
 		std::size_t					pendPos = csize;
 		std::size_t					getterPos = step + step - 1;
 		// making pend
-		while (getterPos + 1 < pendPos)
+		std::cout << "CREATING PEND:\n";
+		while ((getterPos += step) + 1 <= pendPos)
 		{
-			ft_moveToEnd(_ctn, getterPos += step, step);
+			ft_moveToEnd(_ctn, getterPos, step);
 			pendPos -= step;
+			std::cout << "GETTER_POS = " << getterPos << std::endl;
+			ft_printDetailedCtn(_ctn, step, pendPos);
 		}
+		std::cout << "\033[31;1mPEND CREATED (STEP " << step << ") :\033[0m\n";
+		ft_printDetailedCtn(_ctn, step, pendPos);
 //		std::cout << "\033[31;1mSTART OF STEP [" << step << "]\033[0m" << std::endl;
 //		std::cout << "\033[31;1mPEND CREATED :\033[0m" << std::endl;
 //		print();
@@ -153,8 +157,7 @@ template <typename C> void	PmergeMe<C>::sort(void)
 						break ;
 					move -= step;
 				}
-				std::cout << "MOVING ELEMENT No." << n + 1 << " FROM PEND TO MAIN AT " << move << std::endl;
-				ft_printDetailedCtn(_ctn, step, pendPos);
+				std::cout << "MOVING ELEMENT No." << n << " FROM PEND TO MAIN AT " << move << std::endl;
 //				std::cout << "N = " << n << ", FIELD = " << (field + fadd + fsub) << std::endl;
 				ft_moveTo(_ctn, pendPos + (step * n) - 1, step, move);
 //				std::cout << "ATFER MOVE:\n";
@@ -165,8 +168,10 @@ template <typename C> void	PmergeMe<C>::sort(void)
 				else
 					fsub = 0;
 				++fadd;
+				ft_printDetailedCtn(_ctn, step, pendPos);
 			}
 		}
 //		std::cout << "\033[31;1mEND OF STEP [" << step << "]\033[0m" << std::endl;
+		std::cout << std::endl;
 	}
 }
