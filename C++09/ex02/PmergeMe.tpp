@@ -115,10 +115,12 @@ template <typename C> void	PmergeMe<C>::sort(void)
 	}
 //	std::cout << "\033[31;1m[INIT] PAIRING\033[0m" << std::endl;
 //	print();
-	step /= 2;
 	while (step /= 2)
 	{
-		std::size_t					pendPos = size();
+		// TODO : Ah.... Maybe add (csize / step) excluded elements to "missing"... if I remember correctly...
+		if (csize / step < 3)
+			continue ;
+		std::size_t					pendPos = csize;
 		std::size_t					getterPos = step + step - 1;
 		// making pend
 		while (getterPos + 1 < pendPos)
@@ -151,7 +153,7 @@ template <typename C> void	PmergeMe<C>::sort(void)
 						break ;
 					move -= step;
 				}
-				std::cout << "MOVING B" << (n + 1) << " TO " << move << std::endl;
+				std::cout << "MOVING ELEMENT No." << n + 1 << " FROM PEND TO MAIN AT " << move << std::endl;
 				ft_printDetailedCtn(_ctn, step, pendPos);
 //				std::cout << "N = " << n << ", FIELD = " << (field + fadd + fsub) << std::endl;
 				ft_moveTo(_ctn, pendPos + (step * n) - 1, step, move);
