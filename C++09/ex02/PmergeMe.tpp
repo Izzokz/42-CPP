@@ -48,7 +48,7 @@ template <typename C> void	ft_printDetailedCtn(C &ctn, const std::size_t &step, 
 	char		switchColor = 0;
 	std::size_t	endOfMain = pendPos - (pendPos % step) - 1;
 	std::size_t	diff = 0;
-	std::cout << "\033[45;1m";
+	std::cout << "\033[46;1m";
 	for (std::size_t i = 0; i < csize; ++i)
 	{
 		std::cout << ctn[i];
@@ -63,7 +63,7 @@ template <typename C> void	ft_printDetailedCtn(C &ctn, const std::size_t &step, 
 			if (i + 1 >= pendPos)
 				std::cout << ((switchColor = !switchColor) ? "\033[44;1m" : "\033[43;1m");
 			else if (i < endOfMain)
-				std::cout << ((switchColor = !switchColor) ? "\033[46;1m" : "\033[45;1m");
+				std::cout << ((switchColor = !switchColor) ? "\033[45;1m" : "\033[46;1m");
 		}
 	}
 	std::cout << "\033[0m" << std::endl;
@@ -96,14 +96,17 @@ static const std::size_t	g_jacobsthalNumbers[JSIZE] = {0, 1, 1, 3, 5, 11, 21, 43
 
 template <typename C> void	PmergeMe<C>::sort(void)
 {
+	std::size_t						compCount = 0;
 	std::size_t						step = 1;
 	std::size_t						doublestep = 2;
 	std::size_t						csize = size();
 	std::size_t						halfcsize = csize / 2;
-	while (step < halfcsize)
+
+	while (step <= halfcsize)
 	{
 		for (std::size_t i = doublestep - 1; i < csize; i += doublestep)
 		{
+			++compCount;
 			if (_ctn[i - step] > _ctn[i])
 			{
 				for (std::size_t x = 0; x < step; ++x)
@@ -113,8 +116,7 @@ template <typename C> void	PmergeMe<C>::sort(void)
 		step *= 2;
 		doublestep *= 2;
 	}
-//	std::cout << "\033[31;1m[INIT] PAIRING\033[0m" << std::endl;
-//	print();
+
 	while (step /= 2)
 	{
 		if (csize / step < 3)
@@ -122,43 +124,44 @@ template <typename C> void	PmergeMe<C>::sort(void)
 		std::size_t					pendPos = csize;
 		std::size_t					getterPos = step + step - 1;
 		// making pend
-		std::cout << "CREATING PEND:\n";
+//		std::cout << "CREATING PEND:\n";
 		while ((getterPos += step) + 1 <= pendPos)
 		{
 			ft_moveToEnd(_ctn, getterPos, step);
 			pendPos -= step;
-			std::cout << "GETTER_POS = " << getterPos << std::endl;
-			ft_printDetailedCtn(_ctn, step, pendPos);
+//			std::cout << "GETTER_POS = " << getterPos << std::endl;
+//			ft_printDetailedCtn(_ctn, step, pendPos);
 		}
-		std::cout << "\033[31;1mPEND CREATED (STEP " << step << ") :\033[0m\n";
-		ft_printDetailedCtn(_ctn, step, pendPos);
-//		std::cout << "\033[31;1mSTART OF STEP [" << step << "]\033[0m" << std::endl;
-//		std::cout << "\033[31;1mPEND CREATED :\033[0m" << std::endl;
-//		print();
+//		std::cout << "\033[31;1mPEND CREATED (STEP " << step << ") :\033[0m\n";
+//		ft_printDetailedCtn(_ctn, step, pendPos);
 		std::size_t					iter = 2;
+		std::size_t					fadd = 0;
+
 		while (pendPos < csize)
 		{
 			std::size_t				field = *(g_jacobsthalNumbers + ++iter);
-			std::size_t				n = ((pendPos + ((field - *(g_jacobsthalNumbers + iter - 1)) * step) > csize) ? ((csize - pendPos) / step + 1) : field - *(g_jacobsthalNumbers + iter - 1) + 1);
+			std::size_t			prev = *(g_jacobsthalNumbers + iter - 1);
+			if (pendPos + (field - prev) * step > csize)
+				field = prev + (csize - pendPos) / step;
+			std::size_t				n = field - prev + 1;
 			char					fsub = 0;
-			std::size_t				fadd = 0;
+
 			while (--n)
 			{
 				const unsigned		val = _ctn[pendPos + step * n - 1];
 				std::size_t			initMove = step * (field + fadd - fsub);
 				std::size_t			move;
-//				std::cout << "INIT MOVE = " << initMove << ", PEND POS = " << pendPos << std::endl;
 				if (initMove > pendPos)
 					initMove -= step;
 				move = initMove;
 				while (move)
 				{
+					++compCount;
 					if (_ctn[move - 1] <= val)
 						break ;
 					move -= step;
 				}
-				std::cout << "MOVING ELEMENT No." << n << " FROM PEND TO MAIN AT " << move << std::endl;
-//				std::cout << "N = " << n << ", FIELD = " << (field + fadd + fsub) << std::endl;
+//				std::cout << "MOVING ELEMENT No." << n << " FROM PEND TO MAIN AT " << move << std::endl;
 				ft_moveTo(_ctn, pendPos + (step * n) - 1, step, move);
 //				std::cout << "ATFER MOVE:\n";
 //				print();
@@ -168,10 +171,12 @@ template <typename C> void	PmergeMe<C>::sort(void)
 				else
 					fsub = 0;
 				++fadd;
-				ft_printDetailedCtn(_ctn, step, pendPos);
+				--field;
+//				ft_printDetailedCtn(_ctn, step, pendPos);
 			}
 		}
 //		std::cout << "\033[31;1mEND OF STEP [" << step << "]\033[0m" << std::endl;
-		std::cout << std::endl;
+//		std::cout << std::endl;
 	}
+	std::cout << compCount << " COMPARISONS !!" << std::endl;
 }
