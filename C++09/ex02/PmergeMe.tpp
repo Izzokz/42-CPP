@@ -150,23 +150,30 @@ template <typename C> void	PmergeMe<C>::sort(void)
 			{
 				const unsigned		val = _ctn[pendPos + step * n - 1];
 				std::size_t			initMove = step * (field + fadd - fsub);
-				std::size_t			move;
+				std::size_t			min = 0;
+				std::size_t			max;
 				if (initMove > pendPos)
 					initMove -= step;
-				move = initMove;
-				while (move)
+				max = initMove;
+				while (max - min > step)
 				{
+					std::size_t		move = min + (((max - min) / step) / 2) * step;
 					++compCount;
-					if (_ctn[move - 1] <= val)
-						break ;
-					move -= step;
+					if (_ctn[move - 1] > val)
+						max = move;
+					else
+						min = move;
 				}
+
+				++compCount;
+				if (_ctn[max - 1] <= val)
+					min = max;
 //				std::cout << "MOVING ELEMENT No." << n << " FROM PEND TO MAIN AT " << move << std::endl;
-				ft_moveTo(_ctn, pendPos + (step * n) - 1, step, move);
+				ft_moveTo(_ctn, pendPos + (step * n) - 1, step, min);
 //				std::cout << "ATFER MOVE:\n";
 //				print();
 				pendPos += step;
-				if (initMove == move)
+				if (initMove == min)
 					fsub = 1;
 				else
 					fsub = 0;
