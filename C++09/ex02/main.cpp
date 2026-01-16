@@ -31,11 +31,16 @@ int	main(int argc, const char *const argv[])
 		fPm.add(current);
 		sPm.add(current);
 	}
-//	fPm.print();
-//	sPm.print();
-	fPm.sort();
-	sPm.sort();
+	std::cout << "Before : ";
 	fPm.print();
-//	sPm.print();
-	std::cout << "IS SORTED SCORE = " << (int)(fPm.isSorted() + sPm.isSorted()) << std::endl;
+	long									t1 = fPm.sort();
+	if (!fPm.isSorted())
+		std::cerr << "\033[31;1mfPm is not sorted !\033[0m\n";
+	long									t2 = sPm.sort();
+	if (!sPm.isSorted())
+		std::cerr << "\033[31;1msPm is not sorted !\033[0m\n";
+	std::cout << "After : ";
+	fPm.print();
+	std::cout << "Time to process fPm (std::vector) : " << t1 << "ms.\n";
+	std::cout << "Time to process sPm (std::deque) : " << t2 << "ms." << std::endl;
 }
